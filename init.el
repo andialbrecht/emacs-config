@@ -49,7 +49,8 @@
  '(org-document-title ((((class color) (background light)) (:foreground "brightblue" :weight bold :height 1.44))))
  '(org-hide ((t (:foreground "#333333"))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "green" :weight semi-bold))))
- '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white")))))
+ '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
+ '(rst-level-1-face ((t (:background "black" :weight bold))) t))
 
 
 (custom-set-variables
