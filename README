@@ -1,0 +1,26 @@
+Emacs Configuration
+===================
+
+To use this configuration:
+
+1. update git submodules in src/
+
+  $ git submodule init
+  $ git submodule update
+
+I'm using the development version of org-mode and Gnus, so this step
+might take a while to complete.
+
+You're adviced to compile at least Gnus:
+
+  $ cd src/gnus/
+  $ ./configure && make  # DON'T INSTALL IT! DON'T!!
+
+
+2. Create a symbolic link in your HOME directory
+
+  $ cd ~/
+  $ ln -s THIS_CHECKOUT .emacs.d
+
+
+3. Start Emacs and have fun
