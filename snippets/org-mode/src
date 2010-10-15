@@ -1,0 +1,6 @@
+# name: Source Code Block
+# contributor: Andi Albrecht <albrecht.andi@gmail.com>
+# --
+#+begin_src ${1:emacs-lisp}
+$0
+#+end_src

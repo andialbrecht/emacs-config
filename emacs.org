@@ -1,0 +1,599 @@
+#+TITLE: Emacs Configuration
+#+INFOJS_OPT: view:overview toc:nil
+
+This file is used by [[http://orgmode.org/worg/org-contrib/babel/intro.php#sec-8_2_1][org-babel]] to generate [[file:emacs.el]] from
+it. ~emacs.el~ is then loaded as my Emacs configuration and only
+re-generated the org file changes.
+
+HINT: To disable a code block / configuration option, tangle the block
+with "C-C C-v t".
+
+* Basic configuration
+** Load path
+#+begin_src emacs-lisp 
+  (setq dotfiles-dir (file-name-directory
+                      (or load-file-name (buffer-file-name))))
+    
+  (add-to-list 'load-path dotfiles-dir)
+  (add-to-list 'load-path
+               (expand-file-name "src" dotfiles-dir))
+  
+  ;;  (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
+  ;;  (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/jabber"))
+    
+  ;;  (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
+  (setq package-user-dir (concat dotfiles-dir "elpa"))
+  ;;  (setq custom-file (concat dotfiles-dir "custom.el"))
+#+end_src
+
+** Default packages
+These defaults are copied from the Emacs start kit:
+#+begin_src emacs-lisp
+  (require 'cl)
+  (require 'saveplace)
+  (require 'ffap)
+  (require 'uniquify)
+  (require 'ansi-color)
+  (require 'recentf)
+#+end_src
+** Appearance
+*** UI
+The most basic look and feel for Emacs.
+#+begin_src emacs-lisp
+  ;; no startup message please
+  (setq inhibit-startup-message t)
+  
+  ;; Show column numbers
+  (column-number-mode 1)
+  
+  ;; Disable menu bar and toolbar
+  (menu-bar-mode -1)
+  
+  ;; Show date and time in 24h format in modeline
+  (setq display-time-day-and-date t)
+  (setq display-time-24hr-format t)
+  (display-time-mode 1)
+#+end_src
+*** Visibility of leading and trailing whitespace
+Leading and trailing whitespace is bad (practice) in some, but not in
+all modes. Set ~show-trailing-whitespace~ only for modes where it's
+really relevant to see leading and trailing whitespace characters.
+#+begin_src emacs-lisp
+  (mapc (lambda (hook)
+          (add-hook hook (lambda ()
+                           (setq show-trailing-whitespace t))))
+        '(text-mode-hook
+          emacs-lisp-mode-hook
+          python-mode-hook
+          js2-mode-hook
+          ))
+#+end_src
+** Window configuration
+For detail about [[http://www.emacswiki.org/emacs/WindowConfiguration][window configuration]]. Let's just enable [[http://www.emacswiki.org/emacs/WinnerMode][Winner Mode]]
+and use Alt key. Use ~Alt-<arrow>~ to move focus to desired window.
+
+#+begin_src emacs-lisp
+  ;; Winner mode
+  (winner-mode 1)
+  (windmove-default-keybindings 'meta)
+#+end_src
+** ispell
+Usually I need to lookup the correct spelling of english words. So
+let's use the american dictionary by default.
+#+begin_src emacs-lisp
+  (setq ispell-dictionary "american")
+#+end_src
+** Buffer managment
+[[emacswiki:IbufferMode]] is great for switching buffers. It's even that
+great, that I set it as the default buffer menu :)
+#+begin_src emacs-lisp
+  (autoload 'ibuffer "ibuffer" "List buffers." t)
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+#+end_src
+
+*** Grouping
+The following configures Gnus-style grouping.
+#+begin_src emacs-lisp
+  (setq ibuffer-saved-filter-groups
+    (quote (("default"      
+              ("Org" ;; all org-related buffers
+               (or
+                (mode . org-mode)
+                (mode . diary-mode)
+                (mode . calendar-mode)
+                (name . "^*Fancy Diary")
+                (name . "^*Org ")
+                ))  
+              ("Mail"
+                (or  ;; mail-related buffers
+                 (mode . message-mode)
+                 (mode . mail-mode)
+                 (mode . gnus-article-mode)
+                 (mode . gnus-summary-mode)
+                 (mode . gnus-group-mode)
+                 (mode . bbdb-mode)
+                 (name . "^\\.bbdb$")
+                 (name . "^\\.newsrc-dribble")
+                 (name . "^\\*-jabber.*")
+                 ;; etc.; all your mail related modes
+                 ))
+              ("Programming" ;; prog stuff not already in MyProjectX
+                (or
+                  (mode . c-mode)
+                  (mode . c++-mode)
+                  (mode . python-mode)
+                  (mode . emacs-lisp-mode)
+                  (mode . lisp-mode)
+                  (mode . sql-mode)
+                  (mode . html-mode)
+                  (mode . pascal-mode)
+                  ;; etc
+                  )) 
+              ("emacs"
+               (or
+                (name . "^\\*scratch\\*$")
+                (name . "^\\*Messages\\*$")
+                (name . "^\\*ielm\\*$")))
+              ))))
+  
+  (add-hook 'ibuffer-mode-hook
+    (lambda ()
+      (ibuffer-switch-to-saved-filter-groups "default")))
+  
+#+end_src
+*** Hiding
+The following hides a bunch of uninteresting buffers from the buffer
+list. You can always switch to those buffers directly, i.e. "C-x b
+.newsrc-dribble".
+#+begin_src emacs-lisp
+  (setq ibuffer-never-show-predicates
+        (list
+         ;; Gnus development version
+         "^\\*nnimap"
+         "^\\*gnus trace"
+         "^\\*imap log"
+         ;; others
+         "^\\*Completions\\*$"
+         "^\\*BBDB\\*$"
+         "^\\.bbdb$"
+         "^\\.newsrc-dribble$"
+         "^\\*magit-"        ;; magit stuff
+         "^\\*fsm-debug"     ;; jabber
+         "\\.org_archive$"   ;; orgmode archive files
+         "^\\*jekyll-aa\\*$" ;; local jekyll server
+  ))
+#+end_src
+** Dired
+My Dired setup is pretty basic since I usually hop into a terminal
+running in another window to do my stuff there. So my
+[[emacswiki:DiredMode]] configuration is basically loading the extra
+features (~dired-x~) and configuring autosave and backup files I don't
+want to see by default.
+#+begin_src emacs-lisp
+  (require 'dired-x)
+  (setq dired-omit-files 
+        (rx (or (seq bol (? ".") "#")         ;; emacs autosave files 
+                (seq "~" eol)                 ;; backup-files 
+                (seq bol "svn" eol)           ;; svn dirs 
+                (seq ".pyc" eol)
+                )))
+  (setq dired-omit-extensions 
+        (append dired-latex-unclean-extensions 
+                dired-bibtex-unclean-extensions 
+                dired-texinfo-unclean-extensions))
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+  (put 'dired-find-alternate-file 'disabled nil)
+  
+#+end_src
+** TODO IDO - Interactively Do Things
+Ido is a bitch and I'm not sure if I really like it. OTOH I don't want
+to miss it in the minibuffer... So my Ido setup is verrry basic, but
+still annoying sometimes.  There are a lot of (not to say way too
+much) configuration examples on [[emacswiki:InteractivelyDoThings]].
+#+begin_src emacs-lisp
+  (ido-mode t)
+  (setq ido-enable-flex-matching t)
+#+end_src
+** Web browser
+Chromium is the default browser in this tiny universe. So let's use it:
+#+begin_src emacs-lisp
+  (setq browse-url-browser-function 'browse-url-generic
+        browse-url-generic-program "chromium-browser")
+#+end_src
+
+...but we want to use w3m too. Here's some basic configuration for this fine piece of software:
+
+#+begin_src emacs-lisp
+  (autoload 'w3m-goto-url "w3m" "Ask a WWW browser to show a URL." t)
+  (setq w3m-use-cookies t)
+#+end_src
+
+** ELPA
+#+begin_src emacs-lisp
+  (setq package-user-dir (concat dotfiles-dir "elpa"))
+  (require 'package)
+  (package-initialize)
+#+end_src
+** Misc.
+Settings that didn't fit in another section.
+#+begin_src emacs-lisp
+  ;; y or n is enough
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  
+  ;; never forget passwords
+  (setq password-cache-expiry nil)
+#+end_src
+* Org-Mode
+** Diary and Calendar
+The diary file is stored in the same directory as my agenda files. The
+main reason is that this directory is synced between different
+machines.
+#+begin_src emacs-lisp
+  (setq diary-file "~/org/diary")
+#+end_src
+Finally make the calendar display a bit more fancy. See [[emacswiki:DiaryMode]].
+#+begin_src emacs-lisp
+  (setq view-diary-entries-initially t
+        mark-diary-entries-in-calendar t
+        number-of-diary-entries 7
+        diary-show-holidays-flag nil
+        calendar-week-start-day 1 ;; week starts on Monday
+  )
+  (add-hook 'diary-display-hook 'fancy-diary-display)
+  (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
+#+end_src
+** Editing
+**** Basic configuration
+By default truncate lines is not enabled in org-mode, but I prefer to have it enabled:
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (toggle-truncate-lines)))
+#+end_src
+
+And finally some more customizations:
+#+begin_src emacs-lisp
+  (setf org-tags-column -75) ;; plays nicely with 80 char terminals
+#+end_src
+
+**** Links
+Link abbreviations have two big advantages: You don't need to type too
+much. And without a link description you easily see where a links
+points too, e.g. the link ~emacswiki:DiaryMode~ is pretty self-explaining.
+See [[orgmanual:Link-abbreviations]] for details.
+#+begin_src emacs-lisp
+  (setq org-link-abbrev-alist
+        '(("emacswiki" . "http://www.emacswiki.org/emacs/%s")
+          ("orgmanual" . "http://orgmode.org/manual/%s.html")))
+#+end_src
+** Agenda
+Add all files in the agenda directory and the diary in the agenda view:
+#+begin_src emacs-lisp
+  (setq org-agenda-files '("~/org/agenda/"))
+  (setq org-agenda-include-diary t)
+#+end_src
+** Tasks
+Here's my TODO sequence. Markers are
+- '!'  - record timestamp
+- '@'  - record a note
+- '/!' - record a timestamp when leaving the state (iff target state
+         doesn't alread logs a timestamp).
+#+begin_src emacs-lisp
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "STARTED(s!)"
+                    "LATER(l@)"
+                    "|" "MAYBE(m!)" "DONE(d!)" "CANCELLED(c!)")))
+#+end_src
+
+Part 2 is just to define some faces for the keywords:
+#+begin_src emacs-lisp
+  (setq org-todo-keyword-faces
+        (quote (("TODO"      :foreground "red"          :weight bold)
+                ("STARTED"   :foreground "blue"         :weight bold)
+                ("DONE"      :foreground "forest green" :weight bold)
+                ("WAITING"   :foreground "yellow"       :weight bold)
+                ("MAYBE"     :foreground "goldenrod"    :weight bold)
+                ("CANCELLED" :foreground "orangered"    :weight bold)
+                ("LATER"     :foreground "magenta"      :weight bold)
+                ("NEXT"      :foreground "gold"         :weight bold))))
+#+end_src
+
+Hmmm... I have this in my current conf, but I don't know what it
+actually does... However, refiling tasks works as expected with this
+snippet.
+#+begin_src emacs-lisp
+  (setq org-refile-use-outline-path 'file)
+  (setq org-refile-targets '((org-agenda-files . (:level . 1))))
+#+end_src
+
+By default checkbox counts are for direct children only. Setting this
+to ~nil~ sums up the counts for all children:
+
+#+begin_src emacs-lisp
+  (setq org-hierarchical-checkbox-statistics nil)
+#+end_src
+
+Even with this option set, the way how checkbox counts are summed up
+seems to be somewhat flaky. It only seems to work, if every list item
+has a checkbox, i.e. list items that only exist for grouping need a
+checkbox too, which in turn affects the total count again. (The good
+news are: When you close the last item in a sub-list, you receive a
+double award!)
+
+#+begin_example 
+  * A Heading
+    - [ ] A grouping item [/]
+      - [ ] Another grouping item [/]
+        - [ ] Task 1
+        - [ ] Task 2
+      - [ ] Once again a grouping item [/]
+        - [ ] Task 3
+#+end_example
+
+Finally, when a task is closed, log a timestamp:
+#+begin_src emacs-lisp
+  (setq org-log-done 'time)
+#+end_src
+
+** Remember
+** Export
+Use CSS for highlighting source code when exporting to HTML. The
+default is 'inline-css', but somehow the result are good old font
+tags. It works when using 'css':
+#+begin_src emacs-lisp
+  (setq org-export-htmlize-output-type "css")
+#+end_src
+See the documentation for this variable on how to generate the CSS
+styles. The basic procedure is to make sure that all required modes
+are loaded, e.g. by opening a file in that mode, and then calling the
+command ~org-export-htmlize-generate-css~.
+*** Basic setup
+#+begin_src emacs-lisp
+  (setq org-default-notes-file "~/org/remember.org")
+  
+  (setq remember-annotation-functions '(org-remember-annotation))
+  (setq remember-handler-functions '(org-remember-handler))
+  (add-hook 'remember-mode-hook 'org-remember-apply-template)
+#+end_src
+*** Templates
+#+begin_src emacs-lisp
+  (setq org-remember-templates
+        '( ("Todo" ?t "* TODO %^{Brief Description} %^g\n  - Added: %U%?"
+            "~/org/agenda/todo.org" "Tasks")
+           ("Idea" ?i "* %^{Summary} %^g\n%?"
+            "~/org/ideas.org" "Ideas")
+           ("Blog Post" ?p "\n* %^{Title} %^g\n  :PROPERTIES:\n  :END:\n%?\n"
+            "~/web/org/2010.org" bottom)
+  ))
+#+end_src
+** Clock
+Setting up the clock in org-mode was somehow confusing. Most of the
+configuration is copy & paste - unfortunately I don't know the
+original location. If you (yes, you!) are missing credits here, drop
+me a line!
+#+begin_src emacs-lisp
+  ;; Resume clocking tasks when emacs is restarted
+  (org-clock-persistence-insinuate)
+  ;;
+  ;; Yes it's long... but more is better ;)
+  (setq org-clock-history-length 28)
+  ;; Resume clocking task on clock-in if the clock is open
+  (setq org-clock-in-resume t)
+  ;; Change task state to NEXT when clocking in
+  ;;(setq org-clock-in-switch-to-state (quote bh/clock-in-to-next))
+  ;; Separate drawers for clocking and logs
+  (setq org-drawers (quote ("PROPERTIES" "LOGBOOK" "CLOCK")))
+  ;; Save clock data in the CLOCK drawer and state changes and notes in the LOGBOOK drawer
+  (setq org-clock-into-drawer "CLOCK")
+  ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+  (setq org-clock-out-remove-zero-time-clocks t)
+  ;; Clock out when moving task to a done state
+  (setq org-clock-out-when-done t)
+  ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+  (setq org-clock-persist (quote history))
+  ;; Enable auto clock resolution for finding open clocks
+  (setq org-clock-auto-clock-resolution (quote when-no-clock-is-running))
+  ;; Include current clocking task in clock reports
+  (setq org-clock-report-include-clocking-task t)
+  
+  (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 4 ))
+  
+#+end_src
+** TODO Yasnippet
+Org-Mode seems to need some extra configuration when used with
+Yasnippet. This fragment was in my original Emacs configuration, but -
+again - I need to figure out why it is needed.
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (org-set-local 'yas/trigger-key [tab])
+              (define-key yas/keymap [tab] 'yas/next-field-group)))
+#+end_src
+* Gnus
+Add local Gnus checkout to ~load-path~ and load development version of
+Gnus:
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name
+                "lisp"
+                (expand-file-name "gnus"
+                                  (expand-file-name "src" dotfiles-dir))))
+  (require 'gnus-load)
+#+end_src
+Keep in mind that it's strongly adviced to run ~./configure && make~
+in Gnus checkout to compile Lisp files.
+* BBDB
+Straight-forward bbdb setup. Validation of phone numbers is disabled.
+#+begin_src emacs-lisp
+  (require 'bbdb)
+  (setq bbdb-north-american-phone-numbers-p nil) 
+  (bbdb-initialize)
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-message)
+  (add-hook 'message-setup-hook 'bbdb-define-all-aliases)
+#+end_src
+* Tramp
+TRAMP is a package for editing remote files. Type "/user@host:" in the
+minibuffer when finding a file to get TRAMP fired up. The
+[[emacswiki:TrampMode]] has a lot of tips and tricks if anything goes
+wrong.
+
+Set the default method for accessing remote files to ssh.
+#+begin_src emacs-lisp
+  (setq tramp-default-method "ssh")
+#+end_src
+* Programming Languages
+** Python
+#+begin_src emacs-lisp
+  (autoload 'python-mode "python-mode" "Python Mode." t)
+  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+  (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+#+end_src
+** JavaScript
+#+begin_src emacs-lisp
+  (autoload 'js2-mode "js2" nil t)
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (setq js2-basic-offset 2)
+  (setq js2-auto-indent-p t)
+  (setq js2-cleanup-whitespace t)
+  (setq js2-enter-indents-newline t)
+  (setq js2-indent-on-enter-key t)
+#+end_src
+** CSS
+#+begin_src emacs-lisp
+  (setq css-indent-offset 2)
+#+end_src
+** ReStructuredText
+#+begin_src emacs-lisp
+  (require 'rst)
+  (setq auto-mode-alist
+        (append '(("\\.txt$" . rst-mode)
+                  ("\\.rst$" . rst-mode)
+                  ("\\.rest$" . rst-mode)
+                  ("\\.wiki$" . rst-mode)
+                  ("README" . rst-mode)
+                  ("CHANGES" . rst-mode)
+                  ("TODO" . rst-mode)) auto-mode-alist))
+  
+#+end_src
+** LaTeX and friends
+#+begin_src emacs-lisp
+  (load "auctex.el" nil t t)
+  (load "preview-latex.el" nil t t)
+#+end_src
+[[http://www.cognition.ens.fr/~guerry/u/bibtex-utils.el][bibtext-utils]] is a nice addition to the BibTeX stuff comming with
+Auctex/Emacs.
+#+begin_src emacs-lisp
+  (require 'bibtex-utils)
+#+end_src
+** Pascal
+Yope, I currently need it. But expect this part to be removed pretty
+soon again :-)
+#+begin_src emacs-lisp
+  (add-hook 'pascal-mode-hook
+            (lambda ()
+              (set (make-local-variable 'compile-command)
+                   (concat "gpc "
+                           "--standard-pascal "
+                           "--extended-pascal "
+                           "--disable-keyword=\"case\" "
+                           "--pedantic "
+                           (file-name-nondirectory (buffer-file-name)))
+                   ))
+            t)
+#+end_src
+* Version Control
+** Git
+[[http://philjackson.github.com/magit/magit.html][Magit]] is really cool when working with Git repositories. The entry
+point is "M-x magit-status". See the [[http://daemianmack.com/magit-cheatsheet.org.txt][cheatsheet]] for key bindings.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "magit"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'magit)
+#+end_src
+** Mercurial
+#+begin_src emacs-lisp
+  (require 'mercurial)
+#+end_src
+* Extra packages
+** yasnippet
+- Projekt page: [[http://code.google.com/p/yasnippet/][yasnippet]]
+
+Load the package from src.
+#+begin_src emacs-lisp
+  (require 'yasnippet)
+  (yas/initialize)
+#+end_src
+
+Configure snippet directory and load it
+#+begin_src emacs-lisp
+  (setq yas/root-directory (expand-file-name "snippets" dotfiles-dir))
+  (yas/load-directory yas/root-directory)
+#+end_src
+
+** Edit server extension (Chromium)
+That's an nice addition. An [[https://chrome.google.com/extensions/detail/ljobjlafonikaiipfkggjbhkghgicgoh][extension]] for the Chromium browser that
+adds a little "edit" button to every textarea. When you click on it a
+new frame pops up in your Emacs and you can edit the field there.
+Setting ~edit-server-new-frame~ to ~nil~ is needed when Emacs runs in
+daemon mode.
+#+begin_src emacs-lisp
+  (require 'edit-server)
+  (setq edit-server-new-frame nil)
+  (edit-server-start)
+#+end_src
+
+** Jabber
+Load Jabber package and configure GTalk account. See
+[[emacswiki:JabberEl]] for customization hints.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "jabber"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (load "jabber-autoloads")
+  (setq jabber-account-list
+        '(("albrecht.andi@googlemail.com" 
+           (:network-server . "talk.google.com")
+           (:connection-type . ssl))))
+  (setq jabber-default-show "")
+  (setq jabber-show-offline-contacts nil)
+#+end_src
+
+** Color theme
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "color-theme"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'color-theme)
+  (eval-after-load "color-theme"
+    '(progn
+       (color-theme-initialize)
+       (color-theme-tango-3)))
+#+end_src
+
+* Key Bindings
+** Applications
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c j") 'jabber-connect-all)
+  (global-set-key (kbd "C-c J") 'jabber-send-presence)
+  (global-set-key (kbd "C-c g") 'magit-status)
+  (global-set-key (kbd "C-c w") 'w3m-goto-url)
+#+end_src
+** Org-Mode
+#+begin_src emacs-lisp
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+  (global-set-key "\C-cr" 'org-remember)
+  (global-set-key "\C-cn" 'org-insert-todo-heading)
+  (global-set-key "\C-cN" 'org-insert-todo-subheading)
+  (global-set-key "\C-x\r" 'org-insert-todo-heading-respect-content)
+#+end_src
+** Actions
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f5>") 'browse-url-at-point)
+  (global-set-key "\C-c;" 'comment-or-uncomment-region)
+  (global-set-key "\C-cm" 'gnus-msg-mail) ;; hm... looks strange :)
+  (global-set-key (kbd "C-<f12>") 'save-buffers-kill-emacs)
+#+end_src

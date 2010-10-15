@@ -1,0 +1,6 @@
+# name: a block
+# contributor: Andi Albrecht <albrecht.andi@gmail.com>
+# --
+#+begin_$1 $2
+  $0
+#+end_$1

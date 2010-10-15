@@ -1,0 +1,24 @@
+# name: beamer
+# --
+#+STARTUP: beamer
+#+TITLE:  ${1:Title Goes Here}
+#+AUTHOR: Andi Albrecht
+#+EMAIL:  albrecht.andi@gmail.com
+#+DATE:   ${2:`(format-time-string "%Y-%m-%d")`}
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [${3:english},${4:10}pt,presentation]
+#+BEAMER_FRAME_LEVEL: 2
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{pslatex}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \definecolor{Brown}{cmyk}{0,0.81,1,0.60}
+#+LATEX_HEADER: \definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
+#+LATEX_HEADER: \definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+#+LATEX_HEADER: \definecolor{lightlightgray}{gray}{0.9}
+#+LATEX_HEADER: \lstset{basicstyle=\ttfamily\footnotesize}
+#+LATEX_HEADER: \lstset{showspaces=false, showtabs=false, showstringspaces=false}
+#+LATEX_HEADER: \lstset{keywordstyle=\color{blue}\textbf, commentstyle=\color{red},stringstyle=\color{OliveGreen}}
+#+LaTeX_HEADER: \mode<beamer>\usetheme{${5:Amsterdam}}
+#+LaTeX_HEADER: \institute{${6}}
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+* $0
