@@ -48,8 +48,9 @@ The most basic look and feel for Emacs.
   
   ;; Disable menu bar, toolbar and scrollbar. We don't need that stuff...
   (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
+  (when window-system
+    (tool-bar-mode -1)
+    (scroll-bar-mode -1))
   
   ;; Show date and time in 24h format in modeline
   (setq display-time-day-and-date t)
