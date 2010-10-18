@@ -11,7 +11,7 @@ To use this configuration:
 I'm using the development version of org-mode and Gnus, so this step
 might take a while to complete.
 
-You're adviced to compile at least Gnus:
+If this is the initial checkout, compile Gnus:
 
   $ cd src/gnus/
   $ ./configure && make  # DON'T INSTALL IT! DON'T!!
@@ -24,3 +24,6 @@ You're adviced to compile at least Gnus:
 
 
 3. Start Emacs and have fun
+
+On first run (or whenever emacs.org changes) emacs.el is generated
+from the stuff in emacs.org.
