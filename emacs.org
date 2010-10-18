@@ -72,14 +72,45 @@ really relevant to see leading and trailing whitespace characters.
           ))
 #+end_src
 ** Window configuration
-For detail about [[http://www.emacswiki.org/emacs/WindowConfiguration][window configuration]]. Let's just enable [[http://www.emacswiki.org/emacs/WinnerMode][Winner Mode]]
-and use Alt key. Use ~Alt-<arrow>~ to move focus to desired window.
+[[emacswiki:NumberedWindows]] makes it easy to switch between windows by
+using ~Alt-NUMBER~ to switch between windows. The number is displayed
+in the modeline of each window.
+#+begin_src emacs-lisp
+  (require 'window-number)
+  (window-number-mode)
+  (window-number-meta-mode)
+#+end_src
+
+[[http://www.emacswiki.org/emacs/WinnerMode][Winner Mode]] makes it easy to switch back to a previous window
+layout. You'll love this after reading some news in Gnus :)
 
 #+begin_src emacs-lisp
   ;; Winner mode
   (winner-mode 1)
-  (windmove-default-keybindings 'meta)
 #+end_src
+
+Keyboard shortcuts for window management and navigation:
+
+| Shortcut      | Description                                            |
+|---------------+--------------------------------------------------------|
+| ~Alt+1..9~    | Switch to window 1..9 (see modeline for window number) |
+| ~C-x r f~     | Store configuration in register                        |
+| ~C-x r j~     | Jump to register                                       |
+| ~C-c <left>~  | Winner undo                                            |
+| ~C-c <right>~ | Winner redo                                            |
+|---------------+--------------------------------------------------------|
+| ~C-x 1~       | Delete other window (in frame)                         |
+| ~C-x 2~       | Split vertically                                       |
+| ~C-x 3~       | Split horizontally                                     |
+| ~C-x ^~       | Make selected window taller                            |
+| ~C-x -~       | Shrink window                                          |
+| ~C-x }~       | Make selected window wider                             |
+| ~C-x {~       | Make selected window narrower                          |
+| ~C-x +~       | Make all windows the same height                       |
+
+
+For detail about [[http://www.emacswiki.org/emacs/WindowConfiguration][window configuration]].
+
 ** ispell
 Usually I need to lookup the correct spelling of english words. So
 let's use the american dictionary by default.

@@ -38,6 +38,8 @@
  '(gnus-summary-cancelled ((((class color)) (:foreground "grey40"))))
  '(gnus-summary-normal-ancient ((((class color) (background dark)) (:foreground "grey60"))))
  '(hl-line ((t (:inherit highlight :background "grey20"))))
+ '(jabber-title-large ((t (:inherit variable-pitch :weight bold :height 1.2 :width ultra-expanded))))
+ '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.2 :width expanded))))
  '(magit-diff-add ((nil (:foreground "green"))))
  '(magit-item-highlight ((nil (:background "grey10"))))
  '(mm-uu-extract ((((type tty) (class color) (background dark)) (:background "grey20"))))
@@ -50,7 +52,8 @@
  '(org-hide ((t (:foreground "#333333"))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "green" :weight semi-bold))))
  '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
- '(rst-level-1-face ((t (:background "black" :weight bold))) t))
+ '(rst-level-1-face ((t (:background "black" :weight bold))) t)
+ '(window-number-face ((((type x w32 mac)) (:foreground "lightblue")))))
 
 
 (custom-set-variables
