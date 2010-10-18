@@ -607,6 +607,19 @@ Load Jabber package and configure GTalk account. See
        (color-theme-tango-3)))
 #+end_src
 
+* Custom functions
+** Show/hide menu bar and tool bar
+Sometimes it's useful to actually have a menu bar and tool bar.
+#+begin_src emacs-lisp
+  (defun aa/toggle-chrome ()
+    "Show/hide toolbar and menubar."
+    (interactive)
+    (menu-bar-mode)
+    (when (window-system)
+      (tool-bar-mode)))
+  
+  (global-set-key [f5] 'aa/toggle-chrome)
+#+end_src
 * Key Bindings
 ** Applications
 #+begin_src emacs-lisp
