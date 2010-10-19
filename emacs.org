@@ -248,6 +248,11 @@ Chromium is the default browser in this tiny universe. So let's use it:
   (require 'package)
   (package-initialize)
 #+end_src
+** Shell
+Enable ANSI colors for the shell by default.
+#+begin_src emacs-lisp
+  (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+#+end_src
 ** Misc.
 Settings that didn't fit in another section.
 #+begin_src emacs-lisp
