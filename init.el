@@ -27,6 +27,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(column-marker-1 ((t (:overline "red" :underline "red"))))
  '(gnus-cite-1 ((((class color) (background light)) (:foreground "slategray"))))
  '(gnus-group-mail-3 ((t (:foreground "yellowgreen" :weight bold))))
  '(gnus-group-mail-3-empty ((((class color) (background dark)) (:foreground "grey60"))))

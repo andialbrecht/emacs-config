@@ -625,6 +625,19 @@ more shortcuts.
   (require 'nav)
 #+end_src
 
+** Column marker
+[[emacswiki:ColumnMarker]] highlights one or more columns. I'm using it
+for the 80-column rule.
+#+begin_src emacs-lisp
+  (require 'column-marker)
+  (mapc (lambda (hook)
+          (add-hook hook (lambda () (interactive) (column-marker-1 80))))
+        '(org-mode-hook
+          emacs-lisp-mode-hook
+          python-mode-hook
+          js2-mode-hook
+          text-mode-hook))
+#+end_src
 * Custom functions
 ** Show/hide menu bar and tool bar
 Sometimes it's useful to actually have a menu bar and tool bar.
