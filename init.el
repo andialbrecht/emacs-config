@@ -38,6 +38,8 @@
  '(gnus-summary-cancelled ((((class color)) (:foreground "grey40"))))
  '(gnus-summary-normal-ancient ((((class color) (background dark)) (:foreground "grey60"))))
  '(hl-line ((t (:inherit highlight :background "grey20"))))
+ '(jabber-chat-prompt-foreign ((t (:foreground "chocolate4" :weight bold))))
+ '(jabber-chat-prompt-local ((t (:foreground "lightskyblue" :weight bold))))
  '(jabber-title-large ((t (:inherit variable-pitch :weight bold :height 1.2 :width ultra-expanded))))
  '(jabber-title-medium ((t (:inherit variable-pitch :weight bold :height 1.2 :width expanded))))
  '(magit-diff-add ((nil (:foreground "green"))))
