@@ -433,7 +433,7 @@ me a line!
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 4 ))
   
 #+end_src
-** TODO Yasnippet
+** Yasnippet
 Org-Mode seems to need some extra configuration when used with
 Yasnippet. This fragment was in my original Emacs configuration, but -
 again - I need to figure out why it is needed.
