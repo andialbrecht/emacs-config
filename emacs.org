@@ -607,6 +607,18 @@ Load Jabber package and configure GTalk account. See
        (color-theme-tango-3)))
 #+end_src
 
+** nav
+[[http://code.google.com/p/emacs-nav/][Emacs nav-mode]] provides a lightweight sidebar to access files, buffers
+and tags.  ~M-x nav~ toggles the nav sidebar. See this [[http://code.google.com/p/emacs-nav/wiki/NavModes][wiki page]] for
+more shortcuts.
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "emacs-nav"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'nav)
+#+end_src
+
 * Custom functions
 ** Show/hide menu bar and tool bar
 Sometimes it's useful to actually have a menu bar and tool bar.
@@ -644,4 +656,5 @@ Sometimes it's useful to actually have a menu bar and tool bar.
   (global-set-key "\C-c;" 'comment-or-uncomment-region)
   (global-set-key "\C-cm" 'gnus-msg-mail) ;; hm... looks strange :)
   (global-set-key (kbd "C-<f12>") 'save-buffers-kill-emacs)
+  (global-set-key (kbd "<f2>") 'nav)
 #+end_src
