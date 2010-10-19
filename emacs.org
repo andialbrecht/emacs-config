@@ -438,10 +438,16 @@ Org-Mode seems to need some extra configuration when used with
 Yasnippet. This fragment was in my original Emacs configuration, but -
 again - I need to figure out why it is needed.
 #+begin_src emacs-lisp
+  (defun yas/org-very-safe-expand ()
+    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+  
   (add-hook 'org-mode-hook
             (lambda ()
-              (org-set-local 'yas/trigger-key [tab])
-              (define-key yas/keymap [tab] 'yas/next-field-group)))
+              ;; yasnippet (using the new org-cycle hooks)
+              (make-variable-buffer-local 'yas/trigger-key)
+              (setq yas/trigger-key [tab])
+              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+              (define-key yas/keymap [tab] 'yas/next-field)))
 #+end_src
 * Gnus
 Add local Gnus checkout to ~load-path~ and load development version of
