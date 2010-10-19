@@ -54,11 +54,13 @@
  '(org-agenda-structure ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
  '(org-date ((((class color) (background dark)) (:foreground "lightseagreen" :underline t))))
  '(org-document-info ((((class color) (background light)) (:foreground "brightblue"))))
- '(org-document-title ((((class color) (background light)) (:foreground "brightblue" :weight bold :height 1.44))))
+ '(org-document-title ((t (:foreground "white" :weight semi-bold :height 1.22 :family "URW Bookman L"))))
  '(org-hide ((t (:foreground "#333333"))))
- '(org-level-2 ((t (:inherit outline-2 :foreground "dark khaki" :weight semi-bold))))
+ '(org-level-1 ((t (:inherit outline-1 :slant normal :family "URW Bookman L"))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "chocolate4" :weight semi-bold :family "URW Bookman L"))))
  '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
  '(rst-level-1-face ((t (:background "black" :weight bold))) t)
+ '(variable-pitch ((t (:family "URW Bookman L"))))
  '(window-number-face ((((type x w32 mac)) (:foreground "lightblue")))))
 
 
