@@ -643,6 +643,65 @@ for the 80-column rule.
           js2-mode-hook
           text-mode-hook))
 #+end_src
+* Homepage and blog
+This is the configuration that drives my homepage and blog.
+
+Load some additional org-mode packages for publishing and define the
+project.
+#+begin_src emacs-lisp
+  (require 'org-install)
+  (require 'org-publish)
+  (require 'htmlize)
+  
+  (setq org-publish-project-alist
+        '(
+          ("org-andi"
+           ;; Path to your org files.
+           :base-directory "~/web/org/"
+           :base-extension "org"
+  
+           ;; Path to your Jekyll project.
+           :publishing-directory "~/web/jekyll/"
+           :blog-publishing-directory "~/web/jekyll/blog/"
+           :site-root "http://blog.andialbrecht.de/"
+           :jekyll-sanitize-permalinks t
+           :recursive t
+           :publishing-function org-publish-org-to-html
+           :headline-levels 4
+           :html-extension "html"
+           :body-only t ;; Only export section between <body> </body>
+           )
+          ("org-static-andi"
+           :base-directory "~/web/org/"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf"
+           :publishing-directory "~/web/jekyll/"
+           :recursive t
+           :publishing-function org-publish-attachment)
+          ("andi" :components ("org-andi" "org-static-andi"))
+  
+  ))
+  
+#+end_src
+
+Now load [[http://github.com/andialbrecht/org-jekyll][my fork]] of [[http://github.com/juanre/org-jekyll][org-jekyll]]. Marking drafts as TODO items has the
+benefit, that they easily show up in the agenda (yes, I want to finish
+them).  ~org-jekyll-entry-match~ is a customization of org-jekyll
+provided by my fork on github.
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "org-jekyll"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'org-jekyll)
+  (setq org-jekyll-entry-match "+blog-TODO=\"TODO\"")
+#+end_src
+
+And finally load some custom functions that make it easy to generate
+the pages, start a Jekyll server for devlopment and publish the
+generated files to my server.
+#+begin_src emacs-lisp
+  (require 'aa-homepage)
+#+end_src
 * Custom functions
 ** Show/hide menu bar and tool bar
 Sometimes it's useful to actually have a menu bar and tool bar.

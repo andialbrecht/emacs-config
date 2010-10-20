@@ -7,3 +7,6 @@
 [submodule "src/gnus"]
 	path = src/gnus
 	url = http://git.gnus.org/gnus.git
+[submodule "src/org-jekyll"]
+	path = src/org-jekyll
+	url = git://github.com/andialbrecht/org-jekyll.git
