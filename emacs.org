@@ -1,12 +1,21 @@
 #+TITLE: Emacs Configuration
-#+INFOJS_OPT: view:overview toc:nil
+#+OPTIONS:   H:4 num:nil toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:t ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+BEGIN_HTML
+---
+layout: default
+title: Emacs configuration
+sidebar: <div id="toc"></div>
+---
+<script src="http://samaxesjs.googlecode.com/files/jquery.toc-1.1.0.min.js"></script>
+#+END_HTML
+
 
 This file is used by [[http://orgmode.org/worg/org-contrib/babel/intro.php#sec-8_2_1][org-babel]] to generate [[file:emacs.el]] from
 it. ~emacs.el~ is then loaded as my Emacs configuration and only
 re-generated the org file changes.
 
-HINT: To disable a code block / configuration option, tangle the block
-with "C-C C-v t".
 
 * Basic configuration
 ** Load path
@@ -743,3 +752,11 @@ Sometimes it's useful to actually have a menu bar and tool bar.
   (global-set-key (kbd "C-<f12>") 'save-buffers-kill-emacs)
   (global-set-key (kbd "<f2>") 'nav)
 #+end_src
+
+#+BEGIN_HTML
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#toc').toc();
+});
+</script>
+#+END_HTML
