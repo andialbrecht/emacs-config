@@ -659,6 +659,7 @@ project.
            ;; Path to your org files.
            :base-directory "~/web/org/"
            :base-extension "org"
+           :exclude "/files/"
   
            ;; Path to your Jekyll project.
            :publishing-directory "~/web/jekyll/"
@@ -673,7 +674,8 @@ project.
            )
           ("org-static-andi"
            :base-directory "~/web/org/"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf"
+           ;:base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|html\\|tgz"
+           :base-extension ".*"
            :publishing-directory "~/web/jekyll/"
            :recursive t
            :publishing-function org-publish-attachment)
