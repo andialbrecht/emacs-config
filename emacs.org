@@ -569,6 +569,7 @@ point is "M-x magit-status". See the [[http://daemianmack.com/magit-cheatsheet.o
                (expand-file-name "magit"
                                  (expand-file-name "src" dotfiles-dir)))
   (require 'magit)
+  (require 'magit-svn)
 #+end_src
 ** Mercurial
 #+begin_src emacs-lisp
