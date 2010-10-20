@@ -253,6 +253,10 @@ Chromium is the default browser in this tiny universe. So let's use it:
 
 ** ELPA
 #+begin_src emacs-lisp
+  (setq package-archives
+        '(("ELPA" . "http://tromey.com/elpa/")
+          ("gnu" . "http://elpa.gnu.org/packages/")
+          ("sunrise" . "http://joseito.republika.pl/sunrise-commander/")))
   (setq package-user-dir (concat dotfiles-dir "elpa"))
   (require 'package)
   (package-initialize)
