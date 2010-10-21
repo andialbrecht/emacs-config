@@ -664,8 +664,13 @@ for the 80-column rule.
           js2-mode-hook
           text-mode-hook))
 #+end_src
-** WinRing
-With WinRing you can switch between named window configurations.
+** WinRing						    :contextswitch:
+With [[emacswiki:WinRing][WinRing]] you can switch between named window configurations.
+It makes context switching much easier.
+*** TODO Improvements
+- Is there a way to define default window configurations? Or do I have
+  to start every day from scratch?
+
 #+begin_src emacs-lisp
   (require 'winring)
   (winring-initialize)
