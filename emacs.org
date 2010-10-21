@@ -12,9 +12,9 @@ sidebar: <div id="toc"></div>
 #+END_HTML
 
 
-This file is used by [[http://orgmode.org/worg/org-contrib/babel/intro.php#sec-8_2_1][org-babel]] to generate [[file:emacs.el]] from
+This file is used by [[http://orgmode.org/worg/org-contrib/babel/intro.php#sec-8_2_1][org-babel]] to generate ~emacs.el~ from
 it. ~emacs.el~ is then loaded as my Emacs configuration and only
-re-generated the org file changes.
+re-generated when the org file changes.
 
 
 * Basic configuration
