@@ -540,6 +540,12 @@ Set the default method for accessing remote files to ssh.
                         )))
 #+end_src
 *** Complexity
+I've found this simple complexity checker very handy. The first
+column, i.e. left to the source code, is highlighted either in green,
+yellow or red. You can even see it change while coding - and hopefully
+stop and think things over when it turns red.
+
+Unfortunately I don't know where I've found it...
 #+begin_src emacs-lisp
   (require 'linum)
   (require 'pycomplexity)
