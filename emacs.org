@@ -58,6 +58,7 @@ These defaults are copied from the Emacs start kit:
   (require 'uniquify)
   (require 'ansi-color)
   (require 'recentf)
+  (require 'tramp)
 #+end_src
 ** Appearance
 *** UI
@@ -515,6 +516,8 @@ Set the default method for accessing remote files to ssh.
   (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 #+end_src
 *** Flymake
+Note: This requires ~tramp~ to be loaded. But in this setup tramp is
+already loaded very early.
 #+begin_src emacs-lisp
   (require 'flymake)
   
