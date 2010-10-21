@@ -514,6 +514,31 @@ Set the default method for accessing remote files to ssh.
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
   (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 #+end_src
+*** Flymake
+#+begin_src emacs-lisp
+  (require 'flymake)
+  
+  (setq flymake-no-changes-timeout 3)
+  
+  (when (load "flymake" t)
+    (load "flymake-cursor")
+    (defun flymake-pyflakes-init ()
+       ; Make sure it's not a remote buffer or flymake would not work
+       (when (not (subsetp (list (current-buffer)) (tramp-list-remote-buffers)))
+        (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                           'flymake-create-temp-inplace))
+               (local-file (file-relative-name
+                            temp-file
+                            (file-name-directory buffer-file-name))))
+          (list "pyflakes" (list local-file)))))
+    (add-to-list 'flymake-allowed-file-name-masks
+                 '("devel.+\\.py$" flymake-pyflakes-init)))
+  
+  (add-hook 'python-mode-hook
+            (function (lambda ()
+                        (flymake-mode)
+                        )))
+#+end_src
 ** JavaScript
 #+begin_src emacs-lisp
   (autoload 'js2-mode "js2" nil t)
