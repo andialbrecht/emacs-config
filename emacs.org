@@ -593,11 +593,17 @@ Unfortunately I don't know where I've found it...
 #+begin_src emacs-lisp
   (load "auctex.el" nil t t)
   (load "preview-latex.el" nil t t)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 #+end_src
 [[http://www.cognition.ens.fr/~guerry/u/bibtex-utils.el][bibtext-utils]] is a nice addition to the BibTeX stuff comming with
 Auctex/Emacs.
 #+begin_src emacs-lisp
   (require 'bibtex-utils)
+#+end_src
+
+Generate PDF instead of DVI:
+#+begin_src emacs-lisp
+  (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 #+end_src
 ** Pascal
 Yope, I currently need it. But expect this part to be removed pretty
