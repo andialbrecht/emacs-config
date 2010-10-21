@@ -1,4 +1,7 @@
 (1
+ (auctex .
+	 [(11 86)
+	  nil "integrated environment for *TeX*" tar])
  (muse .
        [(3 20)
 	nil "Authoring and publishing tool" tar])
