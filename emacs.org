@@ -539,6 +539,19 @@ Set the default method for accessing remote files to ssh.
                         (flymake-mode)
                         )))
 #+end_src
+*** Complexity
+#+begin_src emacs-lisp
+  (require 'linum)
+  (require 'pycomplexity)
+  (setq pycomplexity-python-path
+        (expand-file-name "vim-complexity"
+                          (expand-file-name "src" dotfiles-dir)))
+  (add-hook 'python-mode-hook
+            (function (lambda ()
+                        (pycomplexity-mode)
+                        (linum-mode)
+                        )))
+#+end_src
 ** JavaScript
 #+begin_src emacs-lisp
   (autoload 'js2-mode "js2" nil t)
