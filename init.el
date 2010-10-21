@@ -70,6 +70,6 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
- '(safe-local-variable-values (quote ((show-trailing-whitespace . t) (org-export-latex-image-default-option . "width=30em"))))
+ '(safe-local-variable-values (quote ((virtualenv-default-directory . "/home/andi/devel/proto_puforms/src") (virtualenv-workon . "protopuf") (show-trailing-whitespace . t) (org-export-latex-image-default-option . "width=30em"))))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html"))
 
