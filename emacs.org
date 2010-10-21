@@ -664,6 +664,12 @@ for the 80-column rule.
           js2-mode-hook
           text-mode-hook))
 #+end_src
+** WinRing
+With WinRing you can switch between named window configurations.
+#+begin_src emacs-lisp
+  (require 'winring)
+  (winring-initialize)
+#+end_src
 * Homepage and blog
 This is the configuration that drives my homepage and blog.
 
@@ -763,6 +769,13 @@ Sometimes it's useful to actually have a menu bar and tool bar.
   (global-set-key "\C-cm" 'gnus-msg-mail) ;; hm... looks strange :)
   (global-set-key (kbd "C-<f12>") 'save-buffers-kill-emacs)
   (global-set-key (kbd "<f2>") 'nav)
+#+end_src
+
+The default prefix key for WinRing ~C-x 7-~ is a bit awkward.
+~F6~ is much easier to remember:
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f6>") 'winring-next-configuration)
+  (global-set-key (kbd "C-<f6>") 'winring-jump-to-configuration)
 #+end_src
 
 #+BEGIN_HTML
