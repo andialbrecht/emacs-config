@@ -511,6 +511,7 @@ Set the default method for accessing remote files to ssh.
 * Programming Languages
 ** Python
 #+begin_src emacs-lisp
+  (require 'ipython)
   (autoload 'python-mode "python-mode" "Python Mode." t)
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
   (add-to-list 'interpreter-mode-alist '("python" . python-mode))
@@ -821,6 +822,7 @@ Sometimes it's useful to actually have a menu bar and tool bar.
   (global-set-key "\C-cm" 'gnus-msg-mail) ;; hm... looks strange :)
   (global-set-key (kbd "C-<f12>") 'save-buffers-kill-emacs)
   (global-set-key (kbd "<f2>") 'nav)
+  (global-set-key (kbd "<f7>") 'py-shell)
 #+end_src
 
 The default prefix key for WinRing ~C-x 7-~ is a bit awkward.
