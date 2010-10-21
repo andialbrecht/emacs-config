@@ -22,15 +22,29 @@ re-generated the org file changes.
 #+begin_src emacs-lisp 
   (setq dotfiles-dir (file-name-directory
                       (or load-file-name (buffer-file-name))))
-    
+  
+  (if (file-symlink-p (directory-file-name dotfiles-dir))
+      (setq dotfiles-dir (file-truename dotfiles-dir)))
+  
   (add-to-list 'load-path dotfiles-dir)
   (add-to-list 'load-path
                (expand-file-name "src" dotfiles-dir))
   
-  ;;  (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit"))
-  ;;  (add-to-list 'load-path (concat dotfiles-dir "/elpa-to-submit/jabber"))
-    
-  ;;  (setq autoload-file (concat dotfiles-dir "loaddefs.el"))
+  ;; No Gnus
+  (add-to-list 'load-path
+               (expand-file-name
+                "lisp"
+                (expand-file-name "gnus"
+                                  (expand-file-name "src" dotfiles-dir))))
+  (require 'gnus-load)
+  
+  ;; org-mode
+  (add-to-list 'load-path
+               (expand-file-name
+                "lisp"
+                (expand-file-name "org-mode"
+                                  (expand-file-name "src" dotfiles-dir))))
+  
   (setq package-user-dir (concat dotfiles-dir "elpa"))
   ;;  (setq custom-file (concat dotfiles-dir "custom.el"))
 #+end_src
@@ -467,17 +481,10 @@ again - I need to figure out why it is needed.
               (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
               (define-key yas/keymap [tab] 'yas/next-field)))
 #+end_src
-* Gnus
-Add local Gnus checkout to ~load-path~ and load development version of
-Gnus:
-#+begin_src emacs-lisp
-  (add-to-list 'load-path
-               (expand-file-name
-                "lisp"
-                (expand-file-name "gnus"
-                                  (expand-file-name "src" dotfiles-dir))))
-  (require 'gnus-load)
-#+end_src
+* No Gnus
+See "Load path" above. Gnus is loaded pretty early to avoid that the
+version shipped with emacs is loaded at some point.
+
 Keep in mind that it's strongly adviced to run ~./configure && make~
 in Gnus checkout to compile Lisp files.
 * BBDB
