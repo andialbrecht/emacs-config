@@ -61,6 +61,8 @@
  '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
  '(rst-level-1-face ((t (:background "black" :weight bold))) t)
  '(variable-pitch ((t (:family "URW Bookman L"))))
+ '(w3m-anchor ((((class color) (background dark)) (:foreground "LightSkyBlue"))))
+ '(w3m-form ((((class color) (background dark)) (:foreground "chocolate4" :underline t))))
  '(window-number-face ((((type x w32 mac)) (:foreground "lightblue")))))
 
 
@@ -70,6 +72,10 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
+ '(ecb-source-path (quote ("/home/andi/devel/avsam" "/home/andi/devel/emacs-config")))
  '(safe-local-variable-values (quote ((virtualenv-default-directory . "/home/andi/devel/avsam/applikation") (virtualenv-workon . "avsweb") (virtualenv-default-directory . "/home/andi/devel/proto_puforms/src") (virtualenv-workon . "protopuf") (show-trailing-whitespace . t) (org-export-latex-image-default-option . "width=30em"))))
- '(w3m-home-page "file:///home/andi/.w3m/bookmark.html"))
+ '(w3m-cookie-accept-bad-cookies (quote ask))
+ '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
+ '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
+ '(w3m-use-cookies t))
 
