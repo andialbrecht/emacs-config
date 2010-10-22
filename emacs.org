@@ -153,7 +153,7 @@ great, that I set it as the default buffer menu :)
 The following configures Gnus-style grouping.
 #+begin_src emacs-lisp
   (setq ibuffer-saved-filter-groups
-    (quote (("default"      
+    (quote (("default"
               ("Org" ;; all org-related buffers
                (or
                 (mode . org-mode)
@@ -161,7 +161,7 @@ The following configures Gnus-style grouping.
                 (mode . calendar-mode)
                 (name . "^*Fancy Diary")
                 (name . "^*Org ")
-                ))  
+                ))
               ("Mail"
                 (or  ;; mail-related buffers
                  (mode . message-mode)
@@ -186,12 +186,16 @@ The following configures Gnus-style grouping.
                   (mode . html-mode)
                   (mode . pascal-mode)
                   ;; etc
-                  )) 
+                  ))
               ("emacs"
                (or
                 (name . "^\\*scratch\\*$")
                 (name . "^\\*Messages\\*$")
                 (name . "^\\*ielm\\*$")))
+              ("Dired"
+               (or
+                (mode . dired-mode)
+                ))
               ))))
   
   (add-hook 'ibuffer-mode-hook
