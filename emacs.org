@@ -488,6 +488,9 @@ version shipped with emacs is loaded at some point.
 
 Keep in mind that it's strongly adviced to run ~./configure && make~
 in Gnus checkout to compile Lisp files.
+#+begin_src emacs-lisp
+  (require 'gnus-notify)
+#+end_src
 * BBDB
 Straight-forward bbdb setup. Validation of phone numbers is disabled.
 #+begin_src emacs-lisp
