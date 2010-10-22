@@ -862,3 +862,14 @@ $(document).ready(function() {
 });
 </script>
 #+END_HTML
+* Key Bindings Reminder
+This section lists some key bindings. For some reason I've troubles to
+remember those listed here.
+
+** Gnus
+
+| Key   | Description                    |
+|-------+--------------------------------|
+| W w   | Article washing: Do word wrap  |
+| W W c | Article hiding: Hide citations |
+
