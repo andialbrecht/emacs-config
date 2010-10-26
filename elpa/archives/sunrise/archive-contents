@@ -1,46 +1,46 @@
 (1
- (sunrise-commander     . [(4 324)
+ (sunrise-commander     . [(4 325)
                            nil
                            "Two-pane file manager for Emacs based on Dired and inspired by MC"
                            single])
 
  (sunrise-x-buttons     . [(1 315)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Clickable shortcut buttons for the Sunrise Commander file manager ***DO NOT USE WITH sunrise-x-popviewer***"
                            single])
 
  (sunrise-x-checkpoints . [(1 309)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Checkpoint bookmarks for the Sunrise Commander file manager"
                            single])
 
  (sunrise-x-loop        . [(3 315)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Asynchronous execution of filesystem operations for the Sunrise Commander file manager"
                            single])
 
  (sunrise-x-mirror      . [(2 315)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Full read/write access to compressed archives for the Sunrise Commander file manager"
                            single])
 
  (sunrise-x-modeline    . [(2 324)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Navigable mode line for the Sunrise Commander file manager"
                            single])
 
  (sunrise-x-popviewer   . [(1 315)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Floating viewer window for the Sunrise Commander ***DO NOT USE WITH sunrise-x-buttons***"
                            single])
 
  (sunrise-x-tabs        . [(1 317)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Tabs for the Sunrise Commander file manager"
                            single])
 
  (sunrise-x-tree        . [(1 324)
-                           ((sunrise-commander (4 324)))
+                           ((sunrise-commander (4 325)))
                            "Tree View for the Sunrise Commander file manager"
                            single])
 )
