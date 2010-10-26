@@ -285,6 +285,12 @@ Enable ANSI colors for the shell by default.
 #+begin_src emacs-lisp
   (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 #+end_src
+** Emacs Daemon
+Fire up emacs server if not running already.
+#+begin_src emacs-lisp
+  (if (not (server-running-p))
+      (server-start))
+#+end_src
 ** Misc.
 Settings that didn't fit in another section.
 #+begin_src emacs-lisp
