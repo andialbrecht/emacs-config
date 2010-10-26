@@ -58,6 +58,7 @@
  '(org-hide ((t (:foreground "#333333"))))
  '(org-level-1 ((t (:inherit outline-1 :slant normal :family "URW Bookman L"))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "#add400" :weight semi-bold :family "URW Bookman L"))))
+ '(org-scheduled ((((class color) (min-colors 88) (background dark)) (:foreground "#73d216"))))
  '(org-scheduled-today ((((class color) (min-colors 88) (background dark)) (:foreground "#73d216"))))
  '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
  '(pycomplexity-complexity-high ((t (:background "#a40000" :foreground "#a40000"))))
