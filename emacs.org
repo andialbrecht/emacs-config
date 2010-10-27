@@ -484,6 +484,7 @@ Load appointment mode and activate it.
   (require 'appt)
   (appt-activate)
 #+end_src
+Some details in [[emacswiki:AppointmentMode]].
 ** Yasnippet
 Org-Mode seems to need some extra configuration when used with
 Yasnippet. This fragment was in my original Emacs configuration, but -
