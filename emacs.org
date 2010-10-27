@@ -288,8 +288,10 @@ Enable ANSI colors for the shell by default.
 ** Emacs Daemon
 Fire up emacs server if not running already.
 #+begin_src emacs-lisp
+  (server-mode)
   (if (not (server-running-p))
       (server-start))
+  
 #+end_src
 ** Misc.
 Settings that didn't fit in another section.
