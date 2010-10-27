@@ -373,7 +373,7 @@ Part 2 is just to define some faces for the keywords:
                 ("WAITING"   :foreground "yellow"       :weight bold)
                 ("MAYBE"     :foreground "goldenrod"    :weight bold)
                 ("CANCELLED" :foreground "orangered"    :weight bold)
-                ("LATER"     :foreground "magenta"      :weight bold)
+                ("LATER"     :foreground "LightYellow4" :weight bold)
                 ("NEXT"      :foreground "gold"         :weight bold))))
 #+end_src
 
