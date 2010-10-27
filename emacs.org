@@ -478,6 +478,12 @@ me a line!
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 4 ))
   
 #+end_src
+** Appointments
+Load appointment mode and activate it.
+#+begin_src emacs-lisp
+  (require 'appt)
+  (appt-activate)
+#+end_src
 ** Yasnippet
 Org-Mode seems to need some extra configuration when used with
 Yasnippet. This fragment was in my original Emacs configuration, but -
