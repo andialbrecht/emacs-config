@@ -58,6 +58,7 @@
  '(org-hide ((t (:foreground "#333333"))))
  '(org-level-1 ((t (:inherit outline-1 :slant normal :family "URW Bookman L"))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "tan3" :weight semi-bold :family "URW Bookman L"))))
+ '(org-level-4 ((t (:foreground "yellow green"))))
  '(org-scheduled ((((class color) (min-colors 88) (background dark)) (:foreground "#73d216"))))
  '(org-scheduled-today ((((class color) (min-colors 88) (background dark)) (:foreground "#73d216"))))
  '(org-table ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
@@ -86,5 +87,5 @@
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
- '(w3m-use-cookies t t))
+ '(w3m-use-cookies t))
 
