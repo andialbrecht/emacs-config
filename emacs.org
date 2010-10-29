@@ -749,6 +749,19 @@ It makes context switching much easier.
   (require 'winring)
   (winring-initialize)
 #+end_src
+** Twitter
+[[emacswiki:TwitteringMode][TwitteringMode]] is added as a submodule in my git repository.
+Type ~M-x twit~ to get started.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "twittering-mode"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'twittering-mode)
+  (if (window-system)
+      (setq twittering-icon-mode t))
+  (setq twittering-timer-interval 300)
+  
+#+end_src
 * Homepage and blog
 This is the configuration that drives my homepage and blog.
 
