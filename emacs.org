@@ -288,8 +288,10 @@ Enable ANSI colors for the shell by default.
 ** Emacs Daemon
 Fire up emacs server if not running already.
 #+begin_src emacs-lisp
+  (server-mode)
   (if (not (server-running-p))
       (server-start))
+  
 #+end_src
 ** Misc.
 Settings that didn't fit in another section.
@@ -371,7 +373,7 @@ Part 2 is just to define some faces for the keywords:
                 ("WAITING"   :foreground "yellow"       :weight bold)
                 ("MAYBE"     :foreground "goldenrod"    :weight bold)
                 ("CANCELLED" :foreground "orangered"    :weight bold)
-                ("LATER"     :foreground "magenta"      :weight bold)
+                ("LATER"     :foreground "LightYellow4" :weight bold)
                 ("NEXT"      :foreground "gold"         :weight bold))))
 #+end_src
 
@@ -476,6 +478,13 @@ me a line!
   (setq org-agenda-clockreport-parameter-plist '(:link t :maxlevel 4 ))
   
 #+end_src
+** Appointments
+Load appointment mode and activate it.
+#+begin_src emacs-lisp
+  (require 'appt)
+  (appt-activate)
+#+end_src
+Some details in [[emacswiki:AppointmentMode]].
 ** Yasnippet
 Org-Mode seems to need some extra configuration when used with
 Yasnippet. This fragment was in my original Emacs configuration, but -
