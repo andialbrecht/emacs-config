@@ -66,6 +66,7 @@
  '(pycomplexity-complexity-low ((t (:background "#2A4C08" :foreground "#2A4C08"))))
  '(pycomplexity-complexity-normal ((t (:background "#7f7200" :foreground "#7f7200"))))
  '(rst-level-1-face ((t (:background "black" :weight bold))) t)
+ '(rst-level-2-face ((t (:background "black" :foreground "lightskyblue" :weight bold))) t)
  '(variable-pitch ((t (:family "URW Bookman L"))))
  '(w3m-anchor ((((class color) (background dark)) (:foreground "LightSkyBlue"))))
  '(w3m-form ((((class color) (background dark)) (:foreground "chocolate4" :underline t))))
