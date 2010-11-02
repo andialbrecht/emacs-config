@@ -562,14 +562,12 @@ already loaded very early.
   (when (load "flymake" t)
     (load "flymake-cursor")
     (defun flymake-pyflakes-init ()
-       ; Make sure it's not a remote buffer or flymake would not work
-       (when (not (subsetp (list (current-buffer)) (tramp-list-remote-buffers)))
-        (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                           'flymake-create-temp-inplace))
-               (local-file (file-relative-name
-                            temp-file
-                            (file-name-directory buffer-file-name))))
-          (list "pyflakes" (list local-file)))))
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        (list "pyflakes" (list local-file))))
     (add-to-list 'flymake-allowed-file-name-masks
                  '("devel.+\\.py$" flymake-pyflakes-init)))
   
@@ -763,6 +761,19 @@ It makes context switching much easier.
 #+begin_src emacs-lisp
   (require 'winring)
   (winring-initialize)
+#+end_src
+** Twitter
+[[emacswiki:TwitteringMode][TwitteringMode]] is added as a submodule in my git repository.
+Type ~M-x twit~ to get started.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "twittering-mode"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'twittering-mode)
+  (if (window-system)
+      (setq twittering-icon-mode t))
+  (setq twittering-timer-interval 300)
+  
 #+end_src
 * Homepage and blog
 This is the configuration that drives my homepage and blog.
