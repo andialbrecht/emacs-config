@@ -10,3 +10,6 @@
 [submodule "src/org-jekyll"]
 	path = src/org-jekyll
 	url = git://github.com/andialbrecht/org-jekyll.git
+[submodule "src/twittering-mode"]
+	path = src/twittering-mode
+	url = git://github.com/hayamiz/twittering-mode.git
