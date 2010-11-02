@@ -192,10 +192,13 @@ The following configures Gnus-style grouping.
                 (name . "^\\*scratch\\*$")
                 (name . "^\\*Messages\\*$")
                 (name . "^\\*ielm\\*$")))
+              ("Chat"
+               (or
+                (mode . garak-mode)
+                (name . "^\\*Garak\\*$")))
               ("Dired"
                (or
-                (mode . dired-mode)
-                ))
+                (mode . dired-mode)))
               ))))
   
   (add-hook 'ibuffer-mode-hook
@@ -214,6 +217,8 @@ list. You can always switch to those buffers directly, i.e. "C-x b
          "^\\*nnimap"
          "^\\*gnus trace"
          "^\\*imap log"
+         ;; Elim
+         "^\\*elim"
          ;; others
          "^\\*Completions\\*$"
          "^\\*BBDB\\*$"
@@ -773,8 +778,21 @@ Type ~M-x twit~ to get started.
   (if (window-system)
       (setq twittering-icon-mode t))
   (setq twittering-timer-interval 300)
-  
 #+end_src
+** Elim
+#+begin_src emacs-lisp
+  (add-to-list
+   'load-path
+   (expand-file-name "elisp"
+                     (expand-file-name "elim"
+                                       (expand-file-name "src"
+                                                         dotfiles-dir))))
+  (autoload 'garak "garak" nil t)
+  (setq garak-hide-offline-buddies t)
+#+end_src
+Elim stores private information in a directory ~elim~ on the same
+level as the generated ~emacs.el~ (this file). Therefore I've added
+this auto-generated ~elim~ directory to ~.gitignore~.
 * Homepage and blog
 This is the configuration that drives my homepage and blog.
 

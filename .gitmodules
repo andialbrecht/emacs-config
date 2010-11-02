@@ -13,3 +13,6 @@
 [submodule "src/twittering-mode"]
 	path = src/twittering-mode
 	url = git://github.com/hayamiz/twittering-mode.git
+[submodule "src/elim"]
+	path = src/elim
+	url = git://git.sv.gnu.org/elim.git
