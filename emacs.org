@@ -185,8 +185,13 @@ The following configures Gnus-style grouping.
                   (mode . sql-mode)
                   (mode . html-mode)
                   (mode . pascal-mode)
+                  (mode . makefile-gmake-mode)
+                  (mode . nxml-mode)
                   ;; etc
                   ))
+              ("Version Control"
+               (or
+                (mode . magit-mode)))
               ("Emacs"
                (or
                 (name . "^\\*scratch\\*$")
@@ -195,7 +200,8 @@ The following configures Gnus-style grouping.
               ("Chat"
                (or
                 (mode . garak-mode)
-                (name . "^\\*Garak\\*$")))
+                (name . "^\\*Garak\\*$")
+                (mode . twittering-mode)))
               ("Dired"
                (or
                 (mode . dired-mode)))
