@@ -67,6 +67,7 @@
  '(pycomplexity-complexity-normal ((t (:background "#7f7200" :foreground "#7f7200"))))
  '(rst-level-1-face ((t (:background "black" :weight bold))) t)
  '(rst-level-2-face ((t (:background "black" :foreground "lightskyblue" :weight bold))) t)
+ '(rst-level-3-face ((t (:background "black" :foreground "white" :weight bold))) t)
  '(variable-pitch ((t (:family "URW Bookman L"))))
  '(w3m-anchor ((((class color) (background dark)) (:foreground "LightSkyBlue"))))
  '(w3m-form ((((class color) (background dark)) (:foreground "chocolate4" :underline t))))
@@ -88,5 +89,5 @@
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
- '(w3m-use-cookies t))
+ '(w3m-use-cookies t t))
 
