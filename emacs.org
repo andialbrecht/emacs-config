@@ -784,6 +784,8 @@ Type ~M-x twit~ to get started.
   (if (window-system)
       (setq twittering-icon-mode t))
   (setq twittering-timer-interval 300)
+  (setq twittering-use-master-password t)
+  
 #+end_src
 ** Elim
 #+begin_src emacs-lisp
