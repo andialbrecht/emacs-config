@@ -883,6 +883,38 @@ manager as found on the [[http://www.emacswiki.org/emacs/FullScreen#toc5][EmacsW
     (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
                            '(2 "_NET_WM_STATE_FULLSCREEN" 0)))
 #+end_src
+** Set window width or height
+The following two functions prompt for a width/height in columns and
+tries to set the window size accordingly.
+#+begin_src emacs-lisp
+  (defun aa/window-set-size-internal (is-width)
+    "Prompts for window size (in columns) and adjusts buffer accordingly."
+    (if is-width
+        (progn
+          (setq size (window-width))
+          (setq prompt "Width: "))
+      (progn
+        (setq size (window-height))
+        (setq prompt "Height: ")))
+    (setq reqsize (string-to-int
+                   (read-from-minibuffer prompt (format "%d" size))))
+    (if (> reqsize size)
+        (enlarge-window (- reqsize size) is-width)
+      (shrink-window (- size reqsize) is-width)))
+  
+  (defun aa/window-set-width ()
+    "Set window width."
+    (interactive)
+    (aa/window-set-size-internal t)
+  )
+  
+  (defun aa/window-set-height ()
+    "Set window height."
+    (interactive)
+    (aa/window-set-size-internal nil)
+  )
+  
+#+end_src
 * Key Bindings
 ** Applications
 #+begin_src emacs-lisp
