@@ -154,28 +154,7 @@ The following configures Gnus-style grouping.
 #+begin_src emacs-lisp
   (setq ibuffer-saved-filter-groups
     (quote (("default"
-              ("Org" ;; all org-related buffers
-               (or
-                (mode . org-mode)
-                (mode . diary-mode)
-                (mode . calendar-mode)
-                (name . "^*Fancy Diary")
-                (name . "^*Org ")
-                ))
-              ("Mail"
-                (or  ;; mail-related buffers
-                 (mode . message-mode)
-                 (mode . mail-mode)
-                 (mode . gnus-article-mode)
-                 (mode . gnus-summary-mode)
-                 (mode . gnus-group-mode)
-                 (mode . bbdb-mode)
-                 (name . "^\\.bbdb$")
-                 (name . "^\\.newsrc-dribble")
-                 (name . "^\\*-jabber.*")
-                 ;; etc.; all your mail related modes
-                 ))
-              ("Programming" ;; prog stuff not already in MyProjectX
+             ("Programming" ;; prog stuff not already in MyProjectX
                 (or
                   (mode . c-mode)
                   (mode . c++-mode)
@@ -189,23 +168,44 @@ The following configures Gnus-style grouping.
                   (mode . nxml-mode)
                   ;; etc
                   ))
-              ("Version Control"
-               (or
-                (mode . magit-mode)))
-              ("Emacs"
-               (or
-                (name . "^\\*scratch\\*$")
-                (name . "^\\*Messages\\*$")
-                (name . "^\\*ielm\\*$")))
-              ("Chat"
-               (or
-                (mode . garak-mode)
-                (name . "^\\*Garak\\*$")
-                (mode . twittering-mode)))
-              ("Dired"
-               (or
-                (mode . dired-mode)))
-              ))))
+             ("Version Control"
+              (or
+               (mode . magit-mode)))
+             ("Org" ;; all org-related buffers
+              (or
+               (mode . org-mode)
+               (mode . diary-mode)
+               (mode . calendar-mode)
+               (name . "^*Fancy Diary")
+               (name . "^*Org ")
+               ))
+             ("Mail"
+              (or  ;; mail-related buffers
+               (mode . message-mode)
+               (mode . mail-mode)
+               (mode . gnus-article-mode)
+               (mode . gnus-summary-mode)
+               (mode . gnus-group-mode)
+               (mode . bbdb-mode)
+               (name . "^\\.bbdb$")
+               (name . "^\\.newsrc-dribble")
+               (name . "^\\*-jabber.*")
+               ;; etc.; all your mail related modes
+               ))
+             ("Emacs"
+              (or
+               (name . "^\\*scratch\\*$")
+               (name . "^\\*Messages\\*$")
+               (name . "^\\*ielm\\*$")))
+             ("Chat"
+              (or
+               (mode . garak-mode)
+               (name . "^\\*Garak\\*$")
+               (mode . twittering-mode)))
+             ("Dired"
+              (or
+               (mode . dired-mode)))
+             ))))
   
   (add-hook 'ibuffer-mode-hook
     (lambda ()
