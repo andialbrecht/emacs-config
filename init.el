@@ -23,10 +23,10 @@
 
 ;;; init.el ends here
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t (:overline "red" :underline "red"))))
  '(gnus-cite-1 ((((class color) (background light)) (:foreground "slategray"))))
  '(gnus-group-mail-3 ((t (:foreground "yellowgreen" :weight bold))))
@@ -54,7 +54,7 @@
  '(org-agenda-structure ((((class color) (min-colors 88) (background light)) (:foreground "white"))))
  '(org-date ((((class color) (background dark)) (:foreground "lightseagreen" :underline t))))
  '(org-document-info ((((class color) (background light)) (:foreground "brightblue"))))
- '(org-document-title ((t (:foreground "white" :weight semi-bold :height 1.22 :family "URW Bookman L"))))
+ '(org-document-title ((t (:foreground "white" :weight semi-bold :height 1.22 :family "Bitstream Charter"))))
  '(org-hide ((t (:foreground "#333333"))))
  '(org-level-1 ((t (:inherit outline-1 :slant normal :family "URW Bookman L"))))
  '(org-level-2 ((t (:inherit outline-2 :foreground "tan3" :weight semi-bold :family "URW Bookman L"))))
@@ -75,10 +75,10 @@
 
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
  '(ecb-source-path (quote ("/home/andi/devel/avsam" "/home/andi/devel/emacs-config")))
  '(pascal-auto-lineup nil)
@@ -89,5 +89,5 @@
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
- '(w3m-use-cookies t t))
+ '(w3m-use-cookies t))
 
