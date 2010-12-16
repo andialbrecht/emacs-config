@@ -174,10 +174,10 @@ The following configures Gnus-style grouping.
              ("Org" ;; all org-related buffers
               (or
                (mode . org-mode)
+               (mode . org-agenda-mode)
                (mode . diary-mode)
                (mode . calendar-mode)
                (name . "^*Fancy Diary")
-               (name . "^*Org ")
                ))
              ("Mail"
               (or  ;; mail-related buffers
@@ -196,7 +196,8 @@ The following configures Gnus-style grouping.
               (or
                (name . "^\\*scratch\\*$")
                (name . "^\\*Messages\\*$")
-               (name . "^\\*ielm\\*$")))
+               (name . "^\\*ielm\\*$")
+               (mode . help-mode)))
              ("Chat"
               (or
                (mode . garak-mode)
