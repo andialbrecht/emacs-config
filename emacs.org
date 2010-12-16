@@ -456,7 +456,7 @@ Finally, when a task is closed, log a timestamp:
             "~/org/ideas.org" "Ideas")
            ("Blog Post" ?p "\n* %^{Title} %^g\n  :PROPERTIES:\n  :END:\n%?\n"
             "~/web/org/2010.org" bottom)
-           ("Todo (work)" ?w "* TODO %^{Brief Description}\n  SCHEDULED: %U\n  - %?"
+           ("Todo (work)" ?w "* TODO %^{Brief Description}\n  SCHEDULED: %t\n  - %?"
             "~/org/agenda/prounix.org" "Tasks")
   ))
 #+end_src
