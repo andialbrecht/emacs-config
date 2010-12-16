@@ -439,17 +439,6 @@ Finally, when a task is closed, log a timestamp:
 #+end_src
 
 ** Remember
-** Export
-Use CSS for highlighting source code when exporting to HTML. The
-default is 'inline-css', but somehow the result are good old font
-tags. It works when using 'css':
-#+begin_src emacs-lisp
-  (setq org-export-htmlize-output-type "css")
-#+end_src
-See the documentation for this variable on how to generate the CSS
-styles. The basic procedure is to make sure that all required modes
-are loaded, e.g. by opening a file in that mode, and then calling the
-command ~org-export-htmlize-generate-css~.
 *** Basic setup
 #+begin_src emacs-lisp
   (setq org-default-notes-file "~/org/remember.org")
@@ -467,8 +456,21 @@ command ~org-export-htmlize-generate-css~.
             "~/org/ideas.org" "Ideas")
            ("Blog Post" ?p "\n* %^{Title} %^g\n  :PROPERTIES:\n  :END:\n%?\n"
             "~/web/org/2010.org" bottom)
+           ("Todo (work)" ?w "* TODO %^{Brief Description}\n  SCHEDULED: %U\n  - %?"
+            "~/org/agenda/prounix.org" "Tasks")
   ))
 #+end_src
+** Export
+Use CSS for highlighting source code when exporting to HTML. The
+default is 'inline-css', but somehow the result are good old font
+tags. It works when using 'css':
+#+begin_src emacs-lisp
+  (setq org-export-htmlize-output-type "css")
+#+end_src
+See the documentation for this variable on how to generate the CSS
+styles. The basic procedure is to make sure that all required modes
+are loaded, e.g. by opening a file in that mode, and then calling the
+command ~org-export-htmlize-generate-css~.
 ** Clock
 Setting up the clock in org-mode was somehow confusing. Most of the
 configuration is copy & paste - unfortunately I don't know the
