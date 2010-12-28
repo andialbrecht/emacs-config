@@ -626,6 +626,11 @@ Unfortunately I don't know where I've found it...
                         (linum-mode)
                         )))
 #+end_src
+** Web development
+#+begin_src emacs-lisp
+  (require 'jinja)
+  ;; (add-to-list 'auto-mode-alist '("\\.html$" . jinja-mode))
+#+end_src
 ** JavaScript
 #+begin_src emacs-lisp
   (autoload 'js2-mode "js2" nil t)
