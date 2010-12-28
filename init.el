@@ -89,5 +89,5 @@
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
- '(w3m-use-cookies t))
+ '(w3m-use-cookies t t))
 
