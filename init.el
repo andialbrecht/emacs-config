@@ -81,6 +81,7 @@
   ;; If there is more than one, they won't work right.
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
  '(ecb-source-path (quote ("/home/andi/devel/avsam" "/home/andi/devel/emacs-config")))
+ '(ido-auto-merge-delay-time 7)
  '(pascal-auto-lineup nil)
  '(pascal-indent-level 2)
  '(pascal-indent-nested-functions nil)
