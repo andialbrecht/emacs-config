@@ -80,6 +80,18 @@ The most basic look and feel for Emacs.
   (setq display-time-day-and-date t)
   (setq display-time-24hr-format t)
   (display-time-mode 1)
+  
+  ;; Set default font
+  ;; In case of "Cousine" don't use the "-Latin.ttf" vesions of the font
+  ;; files (those versions are provided in the zip file from Google's
+  ;; webfonts page). The ttf files are also available here:
+  ;; http://code.google.com/p/googlefontdirectory/source/browse/#hg%2Fcousine
+  (condition-case nil
+      (set-default-font "Cousine")
+    (error (condition-case nil
+               (set-default-font "Monaco")
+             (error nil))))
+  
 #+end_src
 *** Visibility of leading and trailing whitespace
 Leading and trailing whitespace is bad (practice) in some, but not in
