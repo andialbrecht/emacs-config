@@ -178,6 +178,7 @@ The following configures Gnus-style grouping.
                   (mode . pascal-mode)
                   (mode . makefile-gmake-mode)
                   (mode . nxml-mode)
+                  (mode . yaml-mode)
                   ;; etc
                   ))
              ("Version Control"
@@ -667,6 +668,11 @@ Auctex/Emacs.
 Generate PDF instead of DVI:
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
+#+end_src
+** YAML
+#+begin_src emacs-lisp
+  (require 'yaml-mode)
+  (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 #+end_src
 ** Pascal
 Yope, I currently need it. But expect this part to be removed pretty
