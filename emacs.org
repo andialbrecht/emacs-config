@@ -337,7 +337,7 @@ machines.
 #+end_src
 Finally make the calendar display a bit more fancy. See [[emacswiki:DiaryMode]].
 #+begin_src emacs-lisp
-  (setq view-diary-entries-initially t
+  (setq view-diary-entries-initially nil
         mark-diary-entries-in-calendar t
         number-of-diary-entries 7
         diary-show-holidays-flag nil
