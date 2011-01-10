@@ -81,6 +81,9 @@ The most basic look and feel for Emacs.
   (setq display-time-24hr-format t)
   (display-time-mode 1)
   
+  ;; shhht, give me some time to think, don't blink
+  (blink-cursor-mode 0)
+  
   ;; Set default font
   ;; In case of "Cousine" don't use the "-Latin.ttf" vesions of the font
   ;; files (those versions are provided in the zip file from Google's
