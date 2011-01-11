@@ -324,6 +324,11 @@ Fire up emacs server if not running already.
       (server-start))
   
 #+end_src
+** Copy & Paste
+See [[http://www.emacswiki.org/emacs/CopyAndPaste][CopyAndPaste]].
+#+begin_src emacs-lisp
+  (setq x-select-enable-clipboard t)
+#+end_src
 ** Misc.
 Settings that didn't fit in another section.
 #+begin_src emacs-lisp
