@@ -185,6 +185,7 @@ The following configures Gnus-style grouping.
                   (mode . makefile-gmake-mode)
                   (mode . nxml-mode)
                   (mode . yaml-mode)
+                  (mode . sh-mode)
                   ;; etc
                   ))
              ("Version Control"
