@@ -648,6 +648,14 @@ Unfortunately I don't know where I've found it...
   (require 'jinja)
   ;; (add-to-list 'auto-mode-alist '("\\.html$" . jinja-mode))
 #+end_src
+** HTML
+Use tabs in HTML code.
+#+begin_src emacs-lisp
+  (add-hook 'html-mode-hook
+            (lambda()
+              (setq sgml-basic-offset 4)
+              (setq indent-tabs-mode t)))
+#+end_src
 ** JavaScript
 #+begin_src emacs-lisp
   (autoload 'js2-mode "js2" nil t)
