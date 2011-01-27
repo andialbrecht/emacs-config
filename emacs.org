@@ -87,6 +87,11 @@ The most basic look and feel for Emacs.
   ;; show matching parens
   (show-paren-mode 1)
   
+  ;; let tabs indent 4 spaces
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'insert-tab)
+  
   ;; Set default font
   ;; In case of "Cousine" don't use the "-Latin.ttf" vesions of the font
   ;; files (those versions are provided in the zip file from Google's
