@@ -23,10 +23,10 @@
 
 ;;; init.el ends here
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t (:overline "red" :underline "red"))))
  '(gnus-cite-1 ((((class color) (background light)) (:foreground "slategray"))))
  '(gnus-group-mail-3 ((t (:foreground "yellowgreen" :weight bold))))
@@ -71,14 +71,15 @@
  '(variable-pitch ((t (:family "URW Bookman L"))))
  '(w3m-anchor ((((class color) (background dark)) (:foreground "LightSkyBlue"))))
  '(w3m-form ((((class color) (background dark)) (:foreground "chocolate4" :underline t))))
+ '(whitespace-indentation ((t (:background "LemonChiffon4" :foreground "orange red"))))
  '(window-number-face ((((type x w32 mac)) (:foreground "lightblue")))))
 
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
  '(ecb-source-path (quote ("/home/andi/devel/avsam" "/home/andi/devel/emacs-config")))
  '(ido-auto-merge-delay-time 7)
