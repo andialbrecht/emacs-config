@@ -658,7 +658,7 @@ Use tabs in HTML code.
 #+end_src
 ** JavaScript
 #+begin_src emacs-lisp
-  (autoload 'js2-mode "js2" nil t)
+;;  (autoload 'js2-mode "js2" nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (setq js2-basic-offset 2)
   (setq js2-auto-indent-p t)
