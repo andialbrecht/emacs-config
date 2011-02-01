@@ -16,3 +16,6 @@
 [submodule "src/elim"]
 	path = src/elim
 	url = git://git.sv.gnu.org/elim.git
+[submodule "src/naquadah-theme"]
+	path = src/naquadah-theme
+	url = git://git.naquadah.org/naquadah-theme.git
