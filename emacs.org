@@ -785,16 +785,9 @@ Load Jabber package and configure GTalk account. See
 ** Color theme
 #+begin_src emacs-lisp
   (set-background-color "black")
-  (add-to-list 'load-path
-               (expand-file-name "color-theme"
-                                 (expand-file-name "src" dotfiles-dir)))
-  (require 'color-theme)
-  (eval-after-load "color-theme"
-    '(progn
-       (color-theme-initialize)
-       (color-theme-tango-3)))
+  (load-theme 'naquadah)
 #+end_src
-
+   
 ** nav
 [[http://code.google.com/p/emacs-nav/][Emacs nav-mode]] provides a lightweight sidebar to access files, buffers
 and tags.  ~M-x nav~ toggles the nav sidebar. See this [[http://code.google.com/p/emacs-nav/wiki/NavModes][wiki page]] for
