@@ -376,6 +376,13 @@ about an "official" implementation.
                     (calendar-absolute-from-gregorian (list month day year)))))
           'font-lock-face 'font-lock-function-name-face))
 #+end_src
+
+Let calendar (and google-maps) know where home is:
+#+begin_src emacs-lisp
+  (setq calendar-latitude 50.553065)
+  (setq calendar-longitude 6.757740)
+  (setq calendar-location-name "Bad Münstereifel")
+#+end_src
 ** Editing
 **** Basic configuration
 By default truncate lines is not enabled in org-mode, but I prefer to have it enabled:
@@ -852,6 +859,18 @@ Type ~M-x twit~ to get started.
 Elim stores private information in a directory ~elim~ on the same
 level as the generated ~emacs.el~ (this file). Therefore I've added
 this auto-generated ~elim~ directory to ~.gitignore~.
+** Google Maps
+See [[http://julien.danjou.info/google-maps-el.html][homepage]] for install instructions and shortcuts.
+
+For org-mode it's ~C-c M-L~ to enter a location and ~C-c M-l~ to view
+a location.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "google-maps"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'google-maps)
+  (require 'org-location-google-maps)
+#+end_src
 * Homepage and blog
 This is the configuration that drives my homepage and blog.
 
