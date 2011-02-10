@@ -714,6 +714,10 @@ Generate PDF instead of DVI:
   (require 'yaml-mode)
   (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 #+end_src
+** Go
+#+begin_src emacs-lisp
+  (require 'go-mode-load)
+#+end_src
 ** Pascal
 Yope, I currently need it. But expect this part to be removed pretty
 soon again :-)
