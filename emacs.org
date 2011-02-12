@@ -709,6 +709,11 @@ Generate PDF instead of DVI:
 #+begin_src emacs-lisp
   (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 #+end_src
+
+Enable Math mode by default, I use it quite often:
+#+begin_src emacs-lisp
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+#+end_src
 ** YAML
 #+begin_src emacs-lisp
   (require 'yaml-mode)
