@@ -191,6 +191,7 @@ The following configures Gnus-style grouping.
                   (mode . nxml-mode)
                   (mode . yaml-mode)
                   (mode . sh-mode)
+                  (mode . rst-mode)
                   ;; etc
                   ))
              ("Version Control"
