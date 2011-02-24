@@ -45,6 +45,9 @@ re-generated when the org file changes.
                 (expand-file-name "org-mode"
                                   (expand-file-name "src" dotfiles-dir))))
   
+  ;; hehe, and I've some Lisp files in my Dropbox :)
+  (add-to-list 'load-path "~/Dropbox/lisp")
+  
   (setq package-user-dir (concat dotfiles-dir "elpa"))
   ;;  (setq custom-file (concat dotfiles-dir "custom.el"))
 #+end_src
