@@ -22,3 +22,6 @@
 [submodule "src/google-maps"]
 	path = src/google-maps
 	url = git://git.naquadah.org/google-maps.git
+[submodule "src/django-mode"]
+	path = src/django-mode
+	url = git://github.com/myfreeweb/django-mode.git

@@ -654,10 +654,27 @@ Unfortunately I don't know where I've found it...
                         (linum-mode)
                         )))
 #+end_src
+*** VirtualEnv
+Virtualenv minor mode is available here: https://github.com/aculich/virtualenv.el
+#+begin_src emacs-lisp
+  (require 'virtualenv)
+#+end_src
 ** Web development
 #+begin_src emacs-lisp
   (require 'jinja)
   ;; (add-to-list 'auto-mode-alist '("\\.html$" . jinja-mode))
+#+end_src
+*** Django
+django-mode is available here: https://github.com/myfreeweb/django-mode
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "django-mode"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (require 'django-html-mode)
+  (require 'django-mode)
+  (yas/load-directory (expand-file-name "snippets"
+                                        (expand-file-name "django-mode"
+                                                          (expand-file-name "src" dotfiles-dir))))
 #+end_src
 ** HTML
 Use tabs in HTML code.
