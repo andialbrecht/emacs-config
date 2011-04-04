@@ -30,6 +30,8 @@ re-generated when the org file changes.
   (add-to-list 'load-path
                (expand-file-name "src" dotfiles-dir))
   
+  (add-to-list 'load-path "/home/andi/tmp/auctex-20110327-a")
+  
   ;; No Gnus
   (add-to-list 'load-path
                (expand-file-name
@@ -659,22 +661,12 @@ Virtualenv minor mode is available here: https://github.com/aculich/virtualenv.e
 #+begin_src emacs-lisp
   (require 'virtualenv)
 #+end_src
-** Web development
+*** pylint
 #+begin_src emacs-lisp
-  (require 'jinja)
-  ;; (add-to-list 'auto-mode-alist '("\\.html$" . jinja-mode))
-#+end_src
-*** Django
-django-mode is available here: https://github.com/myfreeweb/django-mode
-#+begin_src emacs-lisp
-  (add-to-list 'load-path
-               (expand-file-name "django-mode"
-                                 (expand-file-name "src" dotfiles-dir)))
-  (require 'django-html-mode)
-  (require 'django-mode)
-  (yas/load-directory (expand-file-name "snippets"
-                                        (expand-file-name "django-mode"
-                                                          (expand-file-name "src" dotfiles-dir))))
+  (require 'python-pylint)
+  (add-hook 'python-mode-hook '(lambda ()
+            (local-set-key (kbd "C-c m l") 'python-pylint)
+  ))
 #+end_src
 ** HTML
 Use tabs in HTML code.
