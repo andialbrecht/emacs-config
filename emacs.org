@@ -633,9 +633,13 @@ already loaded very early.
                  '("devel.+\\.py$" flymake-pyflakes-init)))
   
   (add-hook 'python-mode-hook
-            (function (lambda ()
-                        (flymake-mode)
-                        )))
+            (lambda ()
+              ; Activate flymake unless buffer is a tmp buffer for the interpreter
+              (if (not (eq buffer-file-name nil))
+                  (progn
+                    (flymake-mode t)
+                    (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+                    (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))))
 #+end_src
 *** Complexity
 I've found this simple complexity checker very handy. The first
@@ -651,10 +655,12 @@ Unfortunately I don't know where I've found it...
         (expand-file-name "vim-complexity"
                           (expand-file-name "src" dotfiles-dir)))
   (add-hook 'python-mode-hook
-            (function (lambda ()
-                        (pycomplexity-mode)
-                        (linum-mode)
-                        )))
+            (lambda ()
+              (if (not (eq buffer-file-name nil))
+                  (progn
+                    (pycomplexity-mode)
+                    (linum-mode)
+                    ))))
 #+end_src
 *** VirtualEnv
 Virtualenv minor mode is available here: https://github.com/aculich/virtualenv.el
