@@ -28,6 +28,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(column-marker-1 ((t (:overline "red" :underline "red"))))
+ '(flymake-warnline ((((class color) (background dark)) (:background "#3e423e" :foreground "LightBlue2"))))
  '(gnus-cite-1 ((((class color) (background light)) (:foreground "slategray"))))
  '(gnus-group-mail-3 ((t (:foreground "yellowgreen" :weight bold))))
  '(gnus-group-mail-3-empty ((((class color) (background dark)) (:foreground "grey60"))))
@@ -88,7 +89,7 @@
  '(pascal-indent-nested-functions nil)
  '(pascal-tab-always-indent nil)
  '(pylint-options "--output-format=parseable -d I")
- '(safe-local-variable-values (quote ((python-pylint-options "-rn" "-f parseable" "-d I" "-d W0511" "--rcfile=~/devel/dlgi/pylint.rc") (python-pylint-command . "~/.virtualenvs/dlgi/bin/python ~/.virtualenvs/dlgi/bin/pylint") (virtualenv-default-directory . "/home/andi/devel/avsam/applikation") (virtualenv-workon . "avsweb") (virtualenv-default-directory . "/home/andi/devel/proto_puforms/src") (virtualenv-workon . "protopuf") (show-trailing-whitespace . t) (org-export-latex-image-default-option . "width=30em"))))
+ '(safe-local-variable-values (quote ((epylint . "~/.virtualenvs/dlgi/bin/epylint") (python-pylint-options "-f parseable" "-d I" "-d W0511" "--rcfile=~/devel/dlgi/tools/pylint.rc") (python-pylint-options "-f parseable" "-d I" "-d W0511" "--rcfile=~/devel/dlgi/pylint.rc") (python-pylint-options "-rn" "-f parseable" "-d I" "-d W0511" "--rcfile=~/devel/dlgi/pylint.rc") (python-pylint-command . "~/.virtualenvs/dlgi/bin/python ~/.virtualenvs/dlgi/bin/pylint") (virtualenv-default-directory . "/home/andi/devel/avsam/applikation") (virtualenv-workon . "avsweb") (virtualenv-default-directory . "/home/andi/devel/proto_puforms/src") (virtualenv-workon . "protopuf") (show-trailing-whitespace . t) (org-export-latex-image-default-option . "width=30em"))))
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-cookie-accept-domains (quote ("localhost" "localhost:8080")))
  '(w3m-home-page "file:///home/andi/.w3m/bookmark.html")
