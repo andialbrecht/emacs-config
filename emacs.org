@@ -821,6 +821,40 @@ Load Jabber package and configure GTalk account. See
 #+begin_src emacs-lisp
   (set-background-color "black")
   (load-theme 'naquadah)
+  ;; (require 'color-theme)
+  ;; (setq color-theme-is-global t)
+  ;; (color-theme-initialize)
+  
+  ;; (load "color-theme-tangotango")
+  ;; (load "color-theme-leuven")
+  
+  ;; (setq my-color-themes (list
+  ;;   'color-theme-tangotango
+  ;;   'color-theme-leuven
+  ;; ))
+  
+  ;; (defun my-theme-set-default () ; Set the first row
+  ;;   (interactive)
+  ;;   (setq theme-current my-color-themes)
+  ;;   (funcall (car theme-current)))
+  
+  ;; (defun my-describe-theme () ; Show the current theme
+  ;;   (interactive)
+  ;;   (message "%s" (car theme-current)))
+  
+  ;; ; Set the next theme (fixed by Chris Webber - tanks)
+  ;; (defun my-theme-cycle ()
+  ;;   (interactive)
+  ;;   (setq theme-current (cdr theme-current))
+  ;;   (if (null theme-current)
+  ;;       (setq theme-current my-color-themes))
+  ;;   (funcall (car theme-current))
+  ;;   (message "%S" (car theme-current)))
+  
+  ;; (setq theme-current my-color-themes)
+  ;; (setq color-theme-is-global nil) ; Initialization
+  ;; (my-theme-set-default)
+  ;; (global-set-key [f4] 'my-theme-cycle)
 #+end_src
    
 ** nav
@@ -920,7 +954,7 @@ project.
            ;; Path to your Jekyll project.
            :publishing-directory "~/web/jekyll/"
            :blog-publishing-directory "~/web/jekyll/blog/"
-           :site-root "http://blog.andialbrecht.de/"
+           :site-root "http://andialbrecht.de"
            :jekyll-sanitize-permalinks t
            :recursive t
            :publishing-function org-publish-org-to-html
