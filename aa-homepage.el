@@ -4,10 +4,10 @@
   (org-publish-project "andi")
   (let (myBuf killBuf)
     (setq killBuf nil)
-    (setq myBuf (get-file-buffer "~/web/org/2010.org"))
+    (setq myBuf (get-file-buffer "~/web/org/2011.org"))
     (if (not myBuf)
 	(progn
-	  (setq myBuf (find-file "~/web/org/2010.org"))
+	  (setq myBuf (find-file "~/web/org/2011.org"))
 	  (setq killBuf t))
       nil)
     (org-jekyll-export-blog)
