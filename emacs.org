@@ -564,34 +564,35 @@ The LaTeX class and xetex setup is copied from [[http://emacs-fu.blogspot.com/20
 xetex you'll need to change the fonts in the LaTeX class too.
 
 #+begin_src emacs-lisp
-(add-to-list 'org-export-latex-classes
-  '("aa-org-summary-de"
-"\\documentclass[11pt,a4paper]{article}
-\\usepackage[T1]{fontenc}
-\\usepackage{fontspec}
-\\usepackage{graphicx}
-\\usepackage[ngerman]{babel}
-\\defaultfontfeatures{Mapping=tex-text}
-\\setromanfont{Gentium}
-\\setromanfont [BoldFont={Gentium Basic Bold},
-                ItalicFont={Gentium Basic Italic}]{Gentium Basic}
-\\setsansfont{Charis SIL}
-\\setmonofont[Scale=0.8]{DejaVu Sans Mono}
-\\usepackage{geometry}
-\\geometry{a4paper, textwidth=6.5in, textheight=10in,
-            marginparsep=7pt, marginparwidth=.6in}
-\\pagestyle{empty}
-\\title{}
-      [NO-DEFAULT-PACKAGES]
-      [NO-PACKAGES]"
-     ("\\section{%s}" . "\\section*{%s}")
-     ("\\subsection{%s}" . "\\subsection*{%s}")
-     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-     ("\\paragraph{%s}" . "\\paragraph*{%s}")
-     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-(setq org-latex-to-pdf-process 
-  '("xelatex -interaction nonstopmode %f"
-     "xelatex -interaction nonstopmode %f")) ;; for multiple passes
+  (add-to-list 'org-export-latex-classes
+    '("aa-org-summary-de"
+  "\\documentclass[11pt,a4paper]{article}
+  \\usepackage[T1]{fontenc}
+  \\usepackage{fontspec}
+  \\usepackage{graphicx}
+  \\usepackage{fancyhdr}
+  \\usepackage[ngerman]{babel}
+  \\defaultfontfeatures{Mapping=tex-text}
+  \\setromanfont{Gentium}
+  \\setromanfont [BoldFont={Gentium Basic Bold},
+                  ItalicFont={Gentium Basic Italic}]{Gentium Basic}
+  \\setsansfont{Charis SIL}
+  \\setmonofont[Scale=0.8]{DejaVu Sans Mono}
+  \\usepackage{geometry}
+  \\geometry{a4paper, textwidth=6.5in, textheight=10in,
+              marginparsep=7pt, marginparwidth=.6in}
+  \\pagestyle{fancy}
+  \\title{}
+        [NO-DEFAULT-PACKAGES]
+        [NO-PACKAGES]"
+       ("\\section{%s}" . "\\section*{%s}")
+       ("\\subsection{%s}" . "\\subsection*{%s}")
+       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+       ("\\paragraph{%s}" . "\\paragraph*{%s}")
+       ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+  (setq org-latex-to-pdf-process 
+    '("xelatex -interaction nonstopmode %f"
+       "xelatex -interaction nonstopmode %f")) ;; for multiple passes
 #+end_src
 ** Yasnippet
 Org-Mode seems to need some extra configuration when used with
