@@ -1124,6 +1124,8 @@ Let's bind ~F8~ to various toggle actions:
   (global-set-key (kbd "<f8> f g") 'aa/flyspell-mode-de)
   (global-set-key (kbd "<f8> f p f") 'aa/flyspell-prog-mode-en)
   (global-set-key (kbd "<f8> f p g") 'aa/flyspell-prog-mode-de)
+  (global-set-key (kbd "<f8> r") 'replace-string)
+  (global-set-key (kbd "<f8> R") 'replace-regexp)
 #+end_src
 
 #+BEGIN_HTML
