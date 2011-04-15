@@ -564,6 +564,7 @@ The LaTeX class and xetex setup is copied from [[http://emacs-fu.blogspot.com/20
 xetex you'll need to change the fonts in the LaTeX class too.
 
 #+begin_src emacs-lisp
+  (require 'org-latex)  ;; make sure all variables are available now
   (add-to-list 'org-export-latex-classes
     '("aa-org-summary-de"
   "\\documentclass[11pt,a4paper]{article}
@@ -809,6 +810,18 @@ point is "M-x magit-status". See the [[http://daemianmack.com/magit-cheatsheet.o
   (require 'mercurial)
 #+end_src
 * Extra packages
+** ack
+The following snippet requires full-ack (available on [[https://github.com/nschum/full-ack][github]]) and an
+installed ~ack~ executable on your system.
+
+#+begin_src emacs-lisp
+  (autoload 'ack-same "full-ack" nil t)
+  (autoload 'ack "full-ack" nil t)
+  (autoload 'ack-find-same-file "full-ack" nil t)
+  (autoload 'ack-find-file "full-ack" nil t)
+  ;; on Debian/Ubuntu you'll need to set the executable
+  (setq ack-executable (executable-find "ack-grep"))
+#+end_src
 ** yasnippet
 - Projekt page: [[http://code.google.com/p/yasnippet/][yasnippet]]
 
