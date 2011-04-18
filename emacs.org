@@ -573,6 +573,7 @@ xetex you'll need to change the fonts in the LaTeX class too.
   \\usepackage{fontspec}
   \\usepackage{graphicx}
   \\usepackage{fancyhdr}
+  \\usepackage{hyperref}
   \\usepackage[ngerman]{babel}
   \\defaultfontfeatures{Mapping=tex-text}
   \\setromanfont{Gentium}
@@ -599,6 +600,7 @@ xetex you'll need to change the fonts in the LaTeX class too.
   \\usepackage{fontspec}
   \\usepackage{graphicx}
   \\usepackage{fancyhdr}
+  \\usepackage[colorlinks=true]{hyperref}
   \\defaultfontfeatures{Mapping=tex-text}
   \\setromanfont{Gentium}
   \\setromanfont [BoldFont={Gentium Basic Bold},
@@ -893,42 +895,45 @@ Load Jabber package and configure GTalk account. See
 
 ** Color theme
 #+begin_src emacs-lisp
-  (set-background-color "black")
-  (load-theme 'naquadah)
-  ;; (require 'color-theme)
-  ;; (setq color-theme-is-global t)
-  ;; (color-theme-initialize)
+  ;; (set-background-color "black")
+  ;; (load-theme 'naquadah)
+  (require 'color-theme)
+  (setq color-theme-is-global t)
+  (color-theme-initialize)
   
-  ;; (load "color-theme-tangotango")
-  ;; (load "color-theme-leuven")
+  (load "color-theme-tangotango")
+  (load "color-theme-mac-classic")
+  (load "color-theme-leuven")
   
-  ;; (setq my-color-themes (list
-  ;;   'color-theme-tangotango
-  ;;   'color-theme-leuven
-  ;; ))
+  (setq my-color-themes
+        (list
+         'color-theme-tangotango
+         'color-theme-mac-classic
+         'color-theme-leuven
+         ))
   
-  ;; (defun my-theme-set-default () ; Set the first row
-  ;;   (interactive)
-  ;;   (setq theme-current my-color-themes)
-  ;;   (funcall (car theme-current)))
+  (defun my-theme-set-default () ; Set the first row
+    (interactive)
+    (setq theme-current my-color-themes)
+    (funcall (car theme-current)))
   
-  ;; (defun my-describe-theme () ; Show the current theme
-  ;;   (interactive)
-  ;;   (message "%s" (car theme-current)))
+  (defun my-describe-theme () ; Show the current theme
+    (interactive)
+    (message "%s" (car theme-current)))
   
-  ;; ; Set the next theme (fixed by Chris Webber - tanks)
-  ;; (defun my-theme-cycle ()
-  ;;   (interactive)
-  ;;   (setq theme-current (cdr theme-current))
-  ;;   (if (null theme-current)
-  ;;       (setq theme-current my-color-themes))
-  ;;   (funcall (car theme-current))
-  ;;   (message "%S" (car theme-current)))
+  ; Set the next theme (fixed by Chris Webber - tanks)
+  (defun my-theme-cycle ()
+    (interactive)
+    (setq theme-current (cdr theme-current))
+    (if (null theme-current)
+        (setq theme-current my-color-themes))
+    (funcall (car theme-current))
+    (message "%S" (car theme-current)))
   
-  ;; (setq theme-current my-color-themes)
-  ;; (setq color-theme-is-global nil) ; Initialization
-  ;; (my-theme-set-default)
-  ;; (global-set-key [f4] 'my-theme-cycle)
+  (setq theme-current my-color-themes)
+  (setq color-theme-is-global nil) ; Initialization
+  (my-theme-set-default)
+  (global-set-key [f4] 'my-theme-cycle)
 #+end_src
    
 ** nav
