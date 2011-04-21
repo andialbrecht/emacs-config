@@ -502,6 +502,8 @@ Finally, when a task is closed, log a timestamp:
             "~/web/org/2010.org" bottom)
            ("Todo (work)" ?w "* TODO %^{Brief Description}\n  SCHEDULED: %t\n  - %?"
             "~/org/agenda/prounix.org" "Tasks")
+           ("Meeting (work)" ?m "* %^{Topic} - %^{Hour}T%?"
+            "~/org/agenda/prounix.org" "Meetings")
   ))
 #+end_src
 ** Export
