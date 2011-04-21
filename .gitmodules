@@ -25,3 +25,6 @@
 [submodule "src/django-mode"]
 	path = src/django-mode
 	url = git://github.com/myfreeweb/django-mode.git
+[submodule "src/emacs-for-python"]
+	path = src/emacs-for-python
+	url = git://github.com/andialbrecht/emacs-for-python.git

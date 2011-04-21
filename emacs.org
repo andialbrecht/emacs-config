@@ -672,11 +672,24 @@ Set the default method for accessing remote files to ssh.
 #+end_src
 * Programming Languages
 ** Python
+Configure and load [[https://github.com/pycologne/emacs-for-python][Emacs for Python]]:
+
+#+begin_src emacs-lisp
+  (add-to-list 'load-path
+               (expand-file-name "emacs-for-python"
+                                 (expand-file-name "src" dotfiles-dir)))
+  
+  (require 'efp)
+  
+  (setq efp-features
+        '( efp-feature-python-mode ))
+  
+  (efp-initialize)
+#+end_src
+
+Let's load ipython:
 #+begin_src emacs-lisp
   (require 'ipython)
-  (autoload 'python-mode "python-mode" "Python Mode." t)
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-  (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 #+end_src
 *** Flymake
 Note: This requires ~tramp~ to be loaded. But in this setup tramp is
