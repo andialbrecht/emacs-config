@@ -1143,6 +1143,20 @@ tries to set the window size accordingly.
   )
   
 #+end_src
+** Sunshine mode
+Sitting outside in the sun, can't read the stuff on your screen?
+Sunshine mode increases font size to something insane - but readable.
+#+begin_src emacs-lisp
+  (defvar aa/sunshine-mode nil)
+  (defun aa/toggle-sunshine-mode()
+    (interactive)
+    (if aa/sunshine-mode
+        (progn
+          (set-default-font "-unknown-Cousine-normal-normal-normal-*-16-*-*-*-m-0-iso10646-1"))
+      (progn
+        (set-default-font "-unknown-Cousine-normal-normal-normal-*-48-*-*-*-m-0-iso10646-1")))
+    (setq aa/sunshine-mode (not aa/sunshine-mode)))
+#+end_src
 * Key Bindings
 ** Applications
 #+begin_src emacs-lisp
