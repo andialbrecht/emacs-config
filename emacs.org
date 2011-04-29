@@ -1198,6 +1198,29 @@ Let's bind ~F8~ to various toggle actions:
   (global-set-key (kbd "<f8> R") 'replace-regexp)
 #+end_src
 
+** Change font size
+A helper to change font size for all buffers. The default binding
+changes fonts for the current buffer.
+#+begin_src emacs-lisp
+  (defun aa/change-font-size (amount)
+    "Change font size"
+    (interactive)
+    (let ((current (face-attribute 'default :height)))
+      (set-face-attribute 'default (not 'this-frame-only) :height
+                          (+ current amount))))
+  
+  (defun aa/font-size-inc()
+    (interactive)
+    (aa/change-font-size 15))
+  
+  (defun aa/font-size-dec()
+    (interactive)
+    (aa/change-font-size -15))
+  
+  (global-set-key (kbd "C-x C-+") 'aa/font-size-inc)
+  (global-set-key (kbd "C-x C--") 'aa/font-size-dec)
+  
+#+end_src
 #+BEGIN_HTML
 <script type="text/javascript">
 $(document).ready(function() {
