@@ -712,7 +712,10 @@ Use tabs in HTML code.
 #+end_src
 ** JavaScript
 #+begin_src emacs-lisp
-;;  (autoload 'js2-mode "js2" nil t)
+  (add-to-list 'load-path
+               (expand-file-name "js2-mode"
+                                 (expand-file-name "src" dotfiles-dir)))
+  (autoload 'js2-mode "js2-mode" nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (setq js2-basic-offset 2)
   (setq js2-auto-indent-p t)
@@ -720,8 +723,8 @@ Use tabs in HTML code.
   (setq js2-enter-indents-newline t)
   (setq js2-indent-on-enter-key t)
   (add-hook 'js2-mode-hook
-              (lambda()
-                (setq indent-tabs-mode t)))
+            (lambda()
+              (setq indent-tabs-mode t)))
 #+end_src
 ** CSS
 #+begin_src emacs-lisp

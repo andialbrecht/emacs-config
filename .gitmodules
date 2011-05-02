@@ -25,3 +25,6 @@
 [submodule "src/django-mode"]
 	path = src/django-mode
 	url = git://github.com/myfreeweb/django-mode.git
+[submodule "src/js2-mode"]
+	path = src/js2-mode
+	url = git://github.com/mooz/js2-mode.git
