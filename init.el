@@ -84,7 +84,6 @@
  '(canlock-password "f015ffc50e20f5ed0abfa805a29a25a7164e790b")
  '(ecb-source-path (quote ("/home/andi/devel/avsam" "/home/andi/devel/emacs-config")))
  '(ido-auto-merge-delay-time 7)
- '(js2-bounce-indent-p t)
  '(js2-mode-escape-quotes nil)
  '(pascal-auto-lineup nil)
  '(pascal-indent-level 2)
