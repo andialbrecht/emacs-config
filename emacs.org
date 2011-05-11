@@ -197,6 +197,7 @@ The following configures Gnus-style grouping.
                   (mode . yaml-mode)
                   (mode . sh-mode)
                   (mode . rst-mode)
+                  (mode . go-mode)
                   ;; etc
                   ))
              ("Version Control"
