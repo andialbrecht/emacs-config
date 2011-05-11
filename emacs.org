@@ -609,6 +609,35 @@ again - I need to figure out why it is needed.
   (setq org-mobile-inbox-for-pull "~/org/flagged.org")
   (setq org-mobile-directory "~/Dropbox/MobileOrg")
 #+end_src
+** Reminders
+See [[http://emacs-fu.blogspot.com/2009/11/showing-pop-ups.html][this blog post]] and [[http://orgmode.org/worg/org-hacks.html#agenda-appt-zenity][this org-hacks snippet]].
+#+begin_src emacs-lisp
+  (defun my-org-agenda-to-appt ()
+    (interactive)
+    (setq appt-time-msg-list nil)
+    (let ((org-deadline-warning-days 0))    ;; will be automatic in org 5.23
+          (org-agenda-to-appt)))
+  
+  ;; Run once, activate and schedule refresh
+  (my-org-agenda-to-appt)
+  (appt-activate t)
+  
+  ; 5 minute warnings
+  (setq appt-message-warning-time 15)
+  (setq appt-display-interval 5)
+  
+  ; Update appt each time agenda opened.
+  (add-hook 'org-finalize-agenda-hook 'my-org-agenda-to-appt)
+  
+  ; Setup zenify, we tell appt to use window, and replace default function
+  (setq appt-display-format 'window)
+  (setq appt-disp-window-function (function my-appt-disp-window))
+  
+  (defun my-appt-disp-window (min-to-app new-time msg)
+    (save-window-excursion (shell-command (concat
+      "/usr/bin/notify-send -i appointment '"
+      msg "' '" (format "In %s minute(s)" min-to-app) "' &") nil nil)))
+#+end_src
 * No Gnus
 See "Load path" above. Gnus is loaded pretty early to avoid that the
 version shipped with emacs is loaded at some point.
