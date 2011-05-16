@@ -25,3 +25,6 @@
 [submodule "src/js2-mode"]
 	path = src/js2-mode
 	url = git://github.com/mooz/js2-mode.git
+[submodule "src/magit"]
+	path = src/magit
+	url = git://github.com/magit/magit.git
