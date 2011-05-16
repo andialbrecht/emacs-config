@@ -417,7 +417,7 @@ See [[orgmanual:Link-abbreviations]] for details.
 ** Agenda
 Add all files in the agenda directory and the diary in the agenda view:
 #+begin_src emacs-lisp
-  (setq org-agenda-files '("~/org/agenda/"))
+  (setq org-agenda-files '("~/org/agenda/" "~/org/agenda/google/"))
   (setq org-agenda-include-diary t)
 #+end_src
 ** Tasks
