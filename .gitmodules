@@ -1,9 +1,6 @@
 [submodule "src/org-mode"]
 	path = src/org-mode
 	url = git://repo.or.cz/org-mode.git
-[submodule "src/magit"]
-	path = src/magit
-	url = git://github.com/philjackson/magit.git
 [submodule "src/gnus"]
 	path = src/gnus
 	url = http://git.gnus.org/gnus.git
