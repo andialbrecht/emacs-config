@@ -4,3 +4,5 @@ tramp
 emacs.el
 url
 elim
+session*
+.org-id-locations
