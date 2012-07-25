@@ -156,5 +156,11 @@
 (global-set-key (kbd "<f8> d") 'distraction-free)
 (global-set-key (kbd "<f8> D") 'distraction-free-simple)
 
+;; Highlight TODOs
+;; Based on http://stackoverflow.com/questions/8551320/highlighting-todos-in-all-programming-modes
+(defun highlight-todos (font-lock-add-keywords nil
+             '(("\\<\\(FIXME\\|TODO\\|BUG\\|NOTE\\|XXX\\)" 1 font-lock-warning-face t))))
+(add-hook 'prog-mode-hook 'highlight-todos)
+
 (provide 'fastedit)
 ;;; fastedit.el ends here
