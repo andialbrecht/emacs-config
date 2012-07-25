@@ -157,10 +157,14 @@
 (global-set-key (kbd "<f8> D") 'distraction-free-simple)
 
 ;; Highlight TODOs
-;; Based on http://stackoverflow.com/questions/8551320/highlighting-todos-in-all-programming-modes
-(defun highlight-todos (font-lock-add-keywords nil
-             '(("\\<\\(FIXME\\|TODO\\|BUG\\|NOTE\\|XXX\\)" 1 font-lock-warning-face t))))
-(add-hook 'prog-mode-hook 'highlight-todos)
+;; Grabbed from Emacs Starter Kit https://github.com/dgutov/emacs-starter-kit/blob/0969080c73323bc0b872e385107d7337a845ab4d/starter-kit-defuns.el
+(defun esk-add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+          1 font-lock-warning-face t))))
+
+(add-hook 'prog-mode-hook 'esk-add-watchwords)
+(add-hook 'python-mode-hook 'esk-add-watchwords)
 
 (provide 'fastedit)
 ;;; fastedit.el ends here
