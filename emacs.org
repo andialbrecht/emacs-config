@@ -1,0 +1,525 @@
+#+TITLE: Emacs Configuration
+#+OPTIONS:   H:4 num:nil toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc
+#+INFOJS_OPT: view:nil toc:t ltoc:t mouse:underline buttons:0 path:http://orgmode.org/org-info.js
+#+STYLE:    <link rel="stylesheet" type="text/css" href="/static/files/emacs-config.css" />
+
+
+This file is used by [[http://orgmode.org/worg/org-contrib/babel/intro.php#sec-8_2_1][org-babel]] to generate ~emacs.el~ from
+it. ~emacs.el~ is then loaded as my Emacs configuration and only
+re-generated when the org file changes.
+
+
+* Globals
+All lisp files needed to run this configuration are either installed
+by system packages. Or found in the same directory where this
+configuration file lives. The path to this configuration directory is
+bound to ~dotfiles-dir~ in the main ~init.el~.
+
+** Load path
+Add ~lib~ as ~aa-libfile-dir~ and ~vendor~ as ~aa-vendor-dir~.
+#+begin_src emacs-lisp
+  (setq aa-libfiles-dir (expand-file-name "lib" dotfiles-dir))
+  (setq aa-vendor-dir (expand-file-name "vendor" dotfiles-dir))
+  (add-to-list 'load-path aa-libfiles-dir)
+  (add-to-list 'load-path aa-vendor-dir)
+#+end_src
+
+** Packages
+Add melpa package archive.
+#+begin_src emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives
+               '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (package-initialize)
+#+end_src
+
+* Look and feel
+** Minimize Emacs' chrome
+Hide a lot of default Emacs chrome, so that we just start with a
+vanilla ~*scratch*~ buffer.
+
+#+begin_src emacs-lisp
+  ;; Remove unused UI elements
+  (tool-bar-mode 0)
+  (menu-bar-mode 0)
+  (scroll-bar-mode 0)
+  (setq inhibit-startup-message t)
+  
+  ;; shhht, give me some time to think, don't blink
+  (blink-cursor-mode 0)
+  
+#+end_src
+
+** Behavior
+These lines configure Emacs' general behavior at certain aspects.
+#+begin_src emacs-lisp
+  ;; show matching parens
+  (show-paren-mode 1)
+  
+  ;; always show column numbers
+  (column-number-mode 1)
+  
+  ;; Narrow (C-x n n)
+  (put 'narrow-to-region 'disabled nil)
+  
+  ;; take the short answer, y/n is yes/no
+  (defalias 'yes-or-no-p 'y-or-n-p)
+#+end_src
+** Font
+Run through a list of preferred fonts and set the first available as
+default.
+#+begin_src emacs-lisp
+  (condition-case nil
+      (set-default-font "Ubuntu Mono 16")
+    (error (condition-case nil
+               (set-default-font "Cousine")
+             (error (condition-case nil
+                        (set-default-font "Monaco")
+                      (error nil))))))
+#+end_src
+** Theme
+With Emacs >= 24 use the new theming support and load my custom theme.
+In addition this part provides a command line switch to start Emacs
+with a light theme that is good for presentations or working in bright
+sunshine.
+The solarized theme is available on MELPA.
+#+begin_src emacs-lisp
+  (cond
+   ((= 24 emacs-major-version)
+    ;; eval lighty directly, adding it to command-switch-alist will result
+    ;; in a later evaluation.
+    (add-to-list 'custom-theme-load-path aa-libfiles-dir)
+    (if (member "-lighty" command-line-args)
+        (progn
+          (setq command-line-args (delete "-lighty" command-line-args))
+          (load-theme 'solarized-light t)
+          (set-default-font "Ubuntu Mono 28"))
+      (load-theme 'candy t))
+    ))
+#+end_src
+
+** Window and buffer management
+*** Set window with and height
+The following two functions prompt for a width/height in columns and
+tries to set the window size accordingly.
+#+begin_src emacs-lisp
+  (defun aa/window-set-size-internal (is-width &optional reqsize)
+    "Prompts for window size (in columns) and adjusts buffer accordingly."
+    (if is-width
+        (progn
+          (setq size (window-width))
+          (setq prompt "Width: "))
+      (progn
+        (setq size (window-height))
+        (setq prompt "Height: ")))
+    (if (eq reqsize nil)
+        (setq reqsize (string-to-int
+                       (read-from-minibuffer prompt (format "%d" size)))))
+    (if (> reqsize size)
+        (enlarge-window (- reqsize size) is-width)
+      (shrink-window (- size reqsize) is-width)))
+  
+  (defun aa/window-set-width ()
+    "Set window width."
+    (interactive)
+    (aa/window-set-size-internal t))
+  
+  (defun aa/window-set-height ()
+    "Set window height."
+    (interactive)
+    (aa/window-set-size-internal nil))
+  
+  (defun aa/make80 ()
+    "Make the current window 80 chars wide."
+    (interactive)
+    (aa/window-set-size-internal t 80))
+#+end_src
+
+*** Window numbers
+[[http://emacswiki.org/emacs/window-number.el][Numbered windows]] makes it easy to switch between windows by using
+Alt-NUMBER to switch between windows. The number is displayed in the
+modeline of each window.
+#+begin_src emacs-lisp
+  (require 'window-number)
+  (window-number-mode)
+  (window-number-meta-mode)
+#+end_src
+
+*** Workspaces
+[[https://github.com/nex3/perspective-el][perspective.el]] is a workspace manager. It tags window configurations
+*and* buffers, which is a big advantage. With other solutions I've had
+the problem that they switch the window configuration but always show
+all buffers. For me that resulted in mixed window configurations, just
+because other buffers were available.
+#+begin_src emacs-lisp
+  (require 'perspective)
+  (persp-mode)
+  
+#+end_src
+*** iBuffer
+#+begin_src emacs-lisp
+  (autoload 'ibuffer "ibuffer" "List buffers." t)
+  (global-set-key (kbd "C-x C-b") 'ibuffer)
+  
+  (setq ibuffer-saved-filter-groups
+    (quote (("default"
+      ("Programming" ;; prog stuff not already in MyProjectX
+       (or
+        (mode . c-mode)
+        (mode . c++-mode)
+        (mode . python-mode)
+        (mode . emacs-lisp-mode)
+        (mode . lisp-mode)
+        (mode . sql-mode)
+        (mode . html-mode)
+        (mode . js2-mode)
+        (mode . pascal-mode)
+        (mode . makefile-gmake-mode)
+        (mode . nxml-mode)
+        (mode . yaml-mode)
+        (mode . sh-mode)
+        (mode . rst-mode)
+        (mode . go-mode)
+        (mode . po-mode)
+        ;; etc
+        ))
+      ("Dired"
+       (or
+        (mode . dired-mode)))
+      ("Version Control"
+       (or
+        (mode . magit-mode)
+        (name . "^*magit")
+        (mode . ahg-status-mode)))
+      ("Org" ;; all org-related buffers
+       (or
+        (mode . org-mode)
+        (mode . org-agenda-mode)
+        (mode . diary-mode)
+        (mode . calendar-mode)
+        (name . "^*Fancy Diary")
+        ))
+      ("Emacs"
+       (or
+        (name . "^\\*scratch\\*$")
+        (name . "^\\*Messages\\*$")
+        (name . "^\\*ielm\\*$")
+        (mode . help-mode)))
+      ))))
+  
+  (add-hook 'ibuffer-mode-hook
+    (lambda ()
+      (ibuffer-switch-to-saved-filter-groups "default")))
+#+end_src
+* Add Ons
+** comint
+Use up and down arrow keys for browsing history
+#+begin_src emacs-lisp
+  (require 'comint)
+  (define-key comint-mode-map (kbd "M-") 'comint-next-input)
+  (define-key comint-mode-map (kbd "M-") 'comint-previous-input)
+  (define-key comint-mode-map [down] 'comint-next-matching-input-from-input)
+  (define-key comint-mode-map [up] 'comint-previous-matching-input-from-input)
+#+end_src
+** yasnippet
+#+begin_src emacs-lisp
+  (require 'yasnippet)
+  (yas/global-mode 1)
+#+end_src
+
+Add custom snippets
+#+begin_src emacs-lisp
+  (yas/load-directory (expand-file-name "snippets" dotfiles-dir))
+#+end_src
+
+yasnippet and org-mode don't play well together when using TAB for
+completion. This should fix it:
+#+begin_src emacs-lisp
+  (defun yas/org-very-safe-expand ()
+                   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (make-variable-buffer-local 'yas/trigger-key)
+              (setq yas/trigger-key [tab])
+              (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+              (define-key yas/keymap [tab] 'yas/next-field)))
+#+end_src
+** IDO
+#+begin_src emacs-lisp
+  (ido-mode t)
+  (setq ido-enable-flex-matching t)
+#+end_src
+** Tramp
+#+begin_src emacs-lisp
+  (require 'tramp)
+  (setq tramp-default-method "ssh")
+#+end_src
+* Orgmode
+Load orgmode.
+#+begin_src emacs-lisp
+  (require 'org)
+  (require 'org-src)  ;; edit src inline
+  (require 'htmlize)  ;; required for export
+  
+#+end_src
+** Editing
+By default is disabled.
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+           (lambda ()
+              (toggle-truncate-lines))) 
+#+end_src
+
+** Key bindinds
+Map ~org-edit-special~ special, the default "C-c '" needs an extra shift
+on my keyboard layout
+#+begin_src emacs-lisp
+  (define-key org-mode-map (kbd "C-c #") 'org-edit-special)
+  (define-key org-src-mode-map (kbd "C-c #") 'org-edit-src-exit)
+#+end_src
+
+The end.
+* Programming
+** General configuration
+*** fastedit.el – my personal helper functions
+Load [[./lib/fastedit.el][fastedit.el]], a bunch of helper functions for my personal editing
+preferences.
+#+begin_src emacs-lisp
+  (require 'fastedit)
+#+end_src
+
+*** Tabs and spaces
+Tabs should indent 4 spaces by default, but for some modes I prefer a
+default of 2:
+#+begin_src emacs-lisp
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (setq indent-line-function 'insert-tab)
+  
+  ;; Only use tab-width of 2 for certain modes.
+  (mapc (lambda (hook)
+          (add-hook hook (lambda ()
+                           (setq-default tab-width 2))))
+        '(js2-mode-hook
+          js-mode-hook
+          css-mode-hook
+  ))
+#+end_src
+*** Style nanny
+Show leading and trailing whitespaces in some modes.
+#+begin_src emacs-lisp
+  (mapc (lambda (hook)
+          (add-hook hook (lambda ()
+                           (setq show-trailing-whitespace t))))
+        '(text-mode-hook
+          emacs-lisp-mode-hook
+          python-mode-hook
+          js2-mode-hook
+          css-mode-hook
+          ))
+#+end_src
+
+Take care of the good ol' 80-column rule. This is driven by the
+[[http://www.emacswiki.org/emacs/ColumnMarker][column-marker]] package.
+
+#+begin_src emacs-lisp
+  (require 'column-marker)
+  (mapc (lambda (hook)
+          (add-hook hook (lambda () (interactive) (column-marker-1 80))))
+        '(org-mode-hook
+          emacs-lisp-mode-hook
+          python-mode-hook
+          js2-mode-hook
+          text-mode-hook))
+#+end_src
+*** Highlight symbol
+Highlight symbol is a very handy package,
+esp. ~highlight-symbol-at-point~. The ~highlight-symbol~ package is
+available via the MELPA archive.
+#+begin_src emacs-lisp
+  (require 'highlight-symbol)
+  (global-set-key (kbd "C-<f3>") 'highlight-symbol-at-point)
+  (global-set-key (kbd "<f3>") 'highlight-symbol-next)
+  (global-set-key (kbd "S-<f3>") 'highlight-symbol-prev)
+  (global-set-key (kbd "M-<f3>") 'highlight-symbol-prev)
+#+end_src
+
+** Python
+*** Python mode
+I'm using the Python mode available on [[https://launchpad.net/python-mode/][Launchpad]].
+#+begin_src emacs-lisp
+  (require 'python)
+  (require 'python-mode)
+  (setq auto-mode-alist (cons '("\\.py$" . python-mode) auto-mode-alist))
+  (setq interpreter-mode-alist (cons '("python" . python-mode)
+                                     interpreter-mode-alist))
+  (autoload 'python-mode "python-mode" "Python editing mode." t)
+#+end_src
+
+Enable Python mode for imenu:
+
+#+begin_src emacs-lisp
+  (defvar py-mode-map python-mode-map)
+  (add-hook 'python-mode-hook
+    (lambda ()
+      (setq imenu-create-index-function 'python-imenu-create-index)))
+#+end_src
+
+*** Flymake / Flake8
+The following runs flake8 on a Python buffer in my ~devel~
+directory. This needs the ~flymake-cursor~ package which is available
+via MELPA.
+#+begin_src emacs-lisp
+  (require 'flymake)
+  (setq flymake-no-changes-timeout 3)
+  
+  (when (load "flymake" t)
+    (load "flymake-cursor")
+    (defun flymake-pyflakes-init ()
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        ;; uncomment either flake8 oder pyflakes
+        ;; (list "flake8" (list local-file))
+        (list "pyflakes" (list local-file))
+        ))
+    (add-to-list 'flymake-allowed-file-name-masks
+                 '("devel.+\\.py$" flymake-pyflakes-init)))
+  
+  (add-hook 'python-mode-hook
+            (lambda ()
+             ; Activate flymake unless buffer is a tmp buffer for the interpreter
+              (if (not (eq buffer-file-name nil))
+                  (progn
+                    (flymake-mode t)
+                    (local-set-key (kbd "M-n") 'flymake-goto-next-error)
+                    (local-set-key (kbd "M-p") 'flymake-goto-prev-error)))))
+  
+#+end_src
+*** Complexity
+[[https://github.com/garybernhardt/pycomplexity/][pycomplexity]] adds green, yellow or red markes left beside a function
+to visualize it's complexity in Python mode.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (expand-file-name "pycomplexity" aa-vendor-dir))
+  (require 'linum)
+  (require 'pycomplexity)
+  (setq pycomplexity-python "python")
+  (add-hook 'python-mode-hook
+            (function (lambda ()
+                        (pycomplexity-mode)
+                        (linum-mode))))
+#+end_src
+*** ipdb
+Pedro Kroger provided in his blog post about [[http://pedrokroger.com/2010/07/configuring-emacs-as-a-python-ide-2/][Configuring Emacs as a
+Python IDE]] a very useful hook when adding the usual ~pdb~ statements
+somewhere.
+#+begin_src emacs-lisp
+  (defun annotate-pdb ()
+    (interactive)
+    (highlight-lines-matching-regexp "import i?pdb")
+    (highlight-lines-matching-regexp "i?pdb.set_trace()"))
+  (add-hook 'python-mode-hook 'annotate-pdb)
+#+end_src
+
+*** ipython
+Use [[http://ipython.scipy.org/dist/ipython.el][ipython.el]] as Python shell
+#+begin_src emacs-lisp
+  (require 'ipython)
+#+end_src
+** Django
+For Django [[https://github.com/davidmiller/pony-mode][pony-mode]] does all the magic. ~pony-mode~ is available on
+MELPA.
+#+begin_src emacs-lisp
+  (require 'pony-mode)
+#+end_src
+
+** CSS/Less
+Less-CSS-mode is installed via MELPA. No additional setup is required.
+** Gettext
+po-mode is part of the gettext suite available [[http://www.gnu.org/software/gettext/%5B%5Bhttp://www.gnu.org/software/gettext/%5D%5B][here]].
+#+begin_src emacs-lisp
+  (require 'po-mode)
+  (autoload 'po-mode "po-mode"
+    "Major mode for translators to edit PO files" t)
+  (setq auto-mode-alist (cons '("\\.po\\'\\|\\.po\\." . po-mode)
+                              auto-mode-alist))
+  (autoload 'po-find-file-coding-system "po-compat")
+  (modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
+                              'po-find-file-coding-system)
+#+end_src
+* Version Control
+** Magit
+[[http://philjackson.github.com/magit/][Magit]] is available from MELPA, not much to do here.
+#+begin_src emacs-lisp
+  (require 'magit)
+  (require 'magit-svn)
+#+end_src
+** Monky
+[[https://github.com/ananthakumaran/monky][Monky]] is a Mercurial frontend that mimics the behavior of Magit. See
+the [[http://www.emacswiki.org/emacs/Mercurial][EmacsWiki]] for alternatives.
+#+begin_src emacs-lisp
+  (add-to-list 'load-path (expand-file-name "monky" aa-vendor-dir))
+  (require 'monky)
+  (setq monky-process-type 'cmdserver)
+#+end_src
+* Tools
+** ack
+Use [[https://github.com/nschum/full-ack][full-ack]] which is available from MELPA:
+#+begin_src emacs-lisp
+  (autoload 'ack-same "full-ack" nil t)
+  (autoload 'ack "full-ack" nil t)
+  (autoload 'ack-find-same-file "full-ack" nil t)
+  (autoload 'ack-find-file "full-ack" nil t)
+  ;; on Debian/Ubuntu you'll need to set the executable
+  (setq ack-executable (executable-find "ack-grep"))
+#+end_src
+** Remember the milk
+Simple RTM Mode is a simple and easy to use mode for working with
+Remember the Milk. The source is hosted on [[https://github.com/mbunkus/simple-rtm][GitHub]].
+
+#+begin_src emacs-lisp
+  (autoload 'simple-rtm-mode "simple-rtm" "Interactive mode for Remember The Milk" t)
+  (eval-after-load 'simple-rtm
+    '(progn
+       (display-simple-rtm-tasks-mode t)))
+#+end_src
+
+** Twitter
+~twiterring-mode~~ is available via MELPA, here's just the config:
+#+begin_src emacs-lisp
+  (require 'twittering-mode)
+  (setq twittering-use-master-password t)
+  (setq twittering-icon-mode t)
+  (setq twittering-timer-interval 300)
+  (setq twittering-url-show-status nil)
+#+end_src
+* Custom Keybindings
+Window configuration related stuff is bound to ~F12~:
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f12>") 'persp-switch-quick)
+  (global-set-key (kbd "C-<f12>") 'persp-switch)
+  (global-set-key (kbd "M-<f12>") 'aa/make80)
+#+end_src
+
+Shortcuts for hacking on source code
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f8> w") 'whitespace-mode)
+  (global-set-key (kbd "<f8> c") 'comment-or-uncomment-region-or-line)
+  (global-set-key (kbd "<f8> r") 'replace-string)
+  (global-set-key (kbd "<f8> R") 'replace-regexp)
+  (global-set-key (kbd "<f8> a") 'ack)
+  (global-set-key (kbd "<f8> A") 'ack-same)
+  (global-set-key (kbd "<f8> g") 'imenu)
+  (global-set-key (kbd "<f8> p l") 'python-pylint)
+  (global-set-key (kbd "<f8> p f") 'python-flake8)
+#+end_src
+
+Misc.
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c g") 'magit-status)
+  (global-set-key (kbd "C-c h") 'monky-status)
+#+end_src
