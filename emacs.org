@@ -152,10 +152,13 @@ modeline of each window.
 the problem that they switch the window configuration but always show
 all buffers. For me that resulted in mixed window configurations, just
 because other buffers were available.
+
+However, perspective somehow changes to order of buffers. For example
+try to delete the current buffer, you will most likely kill another
+one. Hence it's disabled now.
 #+begin_src emacs-lisp
-  (require 'perspective)
-  (persp-mode)
-  
+  ;;(require 'perspective)
+  ;;(persp-mode)
 #+end_src
 *** iBuffer
 #+begin_src emacs-lisp
