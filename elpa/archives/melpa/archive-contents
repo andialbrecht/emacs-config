@@ -60,7 +60,7 @@
 	 [(20120529)
 	  nil "The inverse of fill-paragraph and fill-region [source: github]" single])
  (undo-tree .
-	    [(20120724)
+	    [(20120725)
 	     nil "Treat undo history as a tree [source: git]" single])
  (underwater-theme .
 		   [(20120615)
@@ -285,6 +285,9 @@
  (redshank .
 	   [(20120510)
 	    nil "No description available. [source: git]" tar])
+ (rainbow-mode .
+	       [(20110923)
+		nil "Colorize color names in buffers [source: github]" single])
  (rainbow-delimiters .
 		     [(20120428)
 		      nil "Highlight nested parens, brackets, braces a different color at each depth. [source: github]" single])
@@ -457,7 +460,7 @@
 	   [(20120722)
 	    nil "major mode for editing PHP code [source: github]" single])
  (php+-mode .
-	    [(20120718)
+	    [(20120725)
 	     nil "A better PHP mode with Zend Framework 1 support. [source: github]" tar])
  (perspective .
 	      [(20111121)
@@ -499,6 +502,11 @@
  (openwith .
 	   [(20120531)
 	    nil "Open files with external programs [source: hg]" single])
+ (nrepl .
+	[(20120724)
+	 ((clojure-mode
+	   (1 11)))
+	 "Client for Clojure nREPL [source: github]" single])
  (nginx-mode .
 	     [(20111201)
 	      nil "major mode for editing nginx config files [source: github]" single])
@@ -550,16 +558,19 @@
  (mediawiki .
 	    [(20120527)
 	     nil "mediawiki frontend [source: bzr]" single])
+ (maxframe .
+	   [(20120725)
+	    nil "maximize the emacs frame based on display size [source: github]" single])
  (markdown-mode+ .
 		 [(20120219)
 		  ((markdown-mode
 		    (20111229)))
 		  "extra functions for markdown-mode [source: github]" tar])
  (markdown-mode .
-		[(20120225)
+		[(20120726)
 		 nil "Emacs Major mode for Markdown-formatted text files [source: github]" single])
  (mark-multiple .
-		[(20120708)
+		[(20120726)
 		 nil "A library that sorta lets you mark several regions at once [source: github]" tar])
  (magithub .
 	   [(20120209)
@@ -680,7 +691,7 @@
 		      [(20120724)
 		       nil "highlight the word the point is on [source: github]" single])
  (icicles .
-	  [(20120723)
+	  [(20120725)
 	   nil "Minibuffer input completion and cycling. [source: wiki]" tar])
  (ibuffer-vc .
 	     [(20111221)
@@ -732,10 +743,10 @@
 	    (20120509)))
 	  "helm-sources and some utilities for GNU R. [source: github]" single])
  (helm .
-       [(20120724)
+       [(20120726)
 	nil "Helm is an Emacs incremental and narrowing framework [source: github]" tar])
  (haskell-mode .
-	       [(20120718)
+	       [(20120726)
 		nil "A Haskell editing mode [source: github]" tar])
  (handlebars-mode .
 		  [(20120412)
@@ -762,7 +773,7 @@
 	      [(20120629)
 	       nil "A set of functions and bindings to google under point. [source: github]" single])
  (google-maps .
-	      [(20120724)
+	      [(20120725)
 	       nil "Access Google Maps from Emacs [source: git]" tar])
  (google-c-style .
 		 [(20091009)
@@ -892,7 +903,7 @@
        [(20110425)
 	nil "No description available. [source: git]" tar])
  (emacs-setup .
-	      [(20120524)
+	      [(20120726)
 	       ((revive
 		 (2 19)))
 	       "Package for maintaining your emacs configuration. Clean up your .emacs! [source: github]" tar])
@@ -906,7 +917,7 @@
 	[(20120118)
 	 nil "running leiningen commands from emacs [source: github]" single])
  (ein .
-      [(20120723)
+      [(20120725)
        ((websocket
 	 (0 9)))
        "Emacs IPython Notebook [source: github]" tar])
@@ -922,6 +933,9 @@
  (duplicate-thing .
 		  [(20120516)
 		   nil "Duplicate current line & selection [source: github]" single])
+ (dummy-h-mode .
+	       [(20120303)
+		nil "switch major mode to c-/c++-/objc-mode on .h file [source: wiki]" single])
  (dsvn .
        [(20120506)
 	nil "Subversion interface [source: svn]" single])
@@ -949,6 +963,9 @@
  (deferred .
    [(20120306)
     nil "Simple asynchronous functions for emacs lisp [source: github]" single])
+ (darcsum .
+	  [(20120115)
+	   nil "a pcl-cvs like interface for managing darcs patches [source: darcs]" tar])
  (csv-nav .
 	  [(20091121)
 	   nil "navigate and edit CSV files [source: wiki]" single])
@@ -1034,6 +1051,9 @@
  (bitlbee .
 	  [(20080417)
 	   nil "Help get Bitlbee (http://www.bitlbee.org) up and running [source: git]" single])
+ (bbdb .
+       [(20120720)
+	nil "No description available. [source: git]" tar])
  (backup-walker .
 		[(20110920)
 		 nil "quickly traverse all backups of a file [source: github]" single])
@@ -1079,8 +1099,5 @@
 	    nil "An auto-complete source using slime completions [source: github]" single])
  (ac-dabbrev .
 	     [(20091116)
-	      nil "auto-complete.el source for dabbrev [source: wiki]" single])
- (darcsum .
-	  [(20120115)
-	   nil "a pcl-cvs like interface for managing darcs patches [source: darcs]" tar]))
+	      nil "auto-complete.el source for dabbrev [source: wiki]" single]))
 
