@@ -86,8 +86,8 @@
 (window-number-mode)
 (window-number-meta-mode)
 
-(require 'perspective)
-(persp-mode)
+;;(require 'perspective)
+;;(persp-mode)
 
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
