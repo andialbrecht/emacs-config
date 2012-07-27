@@ -253,6 +253,15 @@ completion. This should fix it:
   (ido-mode t)
   (setq ido-enable-flex-matching t)
 #+end_src
+
+IDO becomes very hectic when creating a new file. If you don't type
+the new file name fast enough, it searches for existing files in other
+directories with the same name and opens them instead. The following
+setting disables that feature.
+#+begin_src emacs-lisp
+  (setq ido-auto-merge-work-directories-length -1)
+#+end_src
+
 ** Tramp
 #+begin_src emacs-lisp
   (require 'tramp)
