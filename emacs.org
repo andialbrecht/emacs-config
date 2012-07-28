@@ -378,6 +378,12 @@ Enable Python mode for imenu:
       (setq imenu-create-index-function 'python-imenu-create-index)))
 #+end_src
 
+Load flake8 addition:
+
+#+begin_src emacs-lisp
+  (require 'python-flake8)
+#+end_src
+
 *** Flymake / Flake8
 The following runs flake8 on a Python buffer in my ~devel~
 directory. This needs the ~flymake-cursor~ package which is available
