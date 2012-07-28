@@ -378,9 +378,10 @@ Enable Python mode for imenu:
       (setq imenu-create-index-function 'python-imenu-create-index)))
 #+end_src
 
-Load flake8 addition:
+Load pylint and flake8 addition:
 
 #+begin_src emacs-lisp
+  (require 'python-pylint)
   (require 'python-flake8)
 #+end_src
 
