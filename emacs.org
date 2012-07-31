@@ -469,6 +469,18 @@ po-mode is part of the gettext suite available [[http://www.gnu.org/software/get
   (modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
                               'po-find-file-coding-system)
 #+end_src
+** LaTeX
+Default [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] setup, stolen from the [[http://www.emacswiki.org/emacs/AUCTeX][wiki]]:
+#+begin_src emacs-lisp
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master "master")  ;; set to nil to choose manually
+  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (setq reftex-plug-into-AUCTeX t)
+#+end_src
 * Version Control
 ** Magit
 [[http://philjackson.github.com/magit/][Magit]] is available from MELPA, not much to do here.
