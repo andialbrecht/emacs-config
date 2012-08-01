@@ -455,6 +455,19 @@ MELPA.
   (require 'pony-mode)
 #+end_src
 
+However, there's an annoying [[https://github.com/davidmiller/pony-mode/issues/55][issue]] when editing templates. As long as
+it isn't fixed we add an workaround:
+#+begin_src emacs-lisp
+  (defun pony-indent ()
+    "Indent current line as Jinja code"
+    (interactive)
+    (beginning-of-line)
+    (let ((indent (pony-calculate-indent)))
+      (if (< indent 0)
+          (setq indent 0))
+      (indent-line-to indent)))
+#+end_src
+
 ** CSS/Less
 Less-CSS-mode is installed via MELPA. No additional setup is required.
 ** Gettext
