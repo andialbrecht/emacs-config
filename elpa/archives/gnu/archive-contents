@@ -87,7 +87,7 @@
 	 [(0 7)
 	  nil "OAuth 2.0 Authorization Protocol" single])
  (org .
-      [(20120726)
+      [(20120731)
        nil "Outline-based notes management and organizer" tar])
  (quarter-plane .
 		[(0 1)
@@ -123,7 +123,7 @@
 	  (0 3)))
 	"Trie data structure" single])
  (undo-tree .
-	    [(0 5 2)
+	    [(0 5 3)
 	     nil "Treat undo history as a tree" single])
  (uni-confusables .
 		  [(0 1)
