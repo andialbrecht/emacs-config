@@ -168,6 +168,7 @@ one. Hence it's disabled now.
   (setq wg-prefix-key (kbd "C-c w"))
   (workgroups-mode 1)
   (wg-load "/home/andi/.workgroups")
+  (setq wg-morph-on nil) ;; no morphing please
 #+end_src
 
 *** iBuffer
