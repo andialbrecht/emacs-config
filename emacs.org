@@ -277,6 +277,14 @@ setting disables that feature.
   (require 'tramp)
   (setq tramp-default-method "ssh")
 #+end_src
+** ispell
+ispell's configuration is good as it is. Just change the default
+dictionary.
+#+begin_src emacs-lisp
+  (setq ispell-dictionary "american")
+  
+#+end_src
+
 * Orgmode
 Load orgmode.
 #+begin_src emacs-lisp
