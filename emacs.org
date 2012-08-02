@@ -160,6 +160,16 @@ one. Hence it's disabled now.
   ;;(require 'perspective)
   ;;(persp-mode)
 #+end_src
+
+[[https://github.com/tlh/workgroups.el][workgroups.el]] is another workspace manager. Let's give it a try.
+
+#+begin_src emacs-lisp
+  (require 'workgroups)
+  (setq wg-prefix-key (kbd "C-c w"))
+  (workgroups-mode 1)
+  (wg-load "/home/andi/.workgroups")
+#+end_src
+
 *** iBuffer
 #+begin_src emacs-lisp
   (autoload 'ibuffer "ibuffer" "List buffers." t)
