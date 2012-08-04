@@ -506,12 +506,13 @@ Default [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] setup, stolen from the
 #+begin_src emacs-lisp
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
-  (setq-default TeX-master "master")  ;; set to nil to choose manually
+  (setq-default TeX-master nil)
   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (setq reftex-plug-into-AUCTeX t)
+  
 #+end_src
 * Version Control
 ** Magit
