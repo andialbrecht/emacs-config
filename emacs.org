@@ -514,6 +514,7 @@ Default [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] setup, stolen from the
 #+begin_src emacs-lisp
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
+  (setq TeX-PDF-mode t)
   (setq-default TeX-master nil)
   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
