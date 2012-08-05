@@ -502,6 +502,14 @@ po-mode is part of the gettext suite available [[http://www.gnu.org/software/get
                               'po-find-file-coding-system)
 #+end_src
 ** LaTeX
+Load [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] and preview-latex:
+#+begin_src emacs-lisp
+  (load "auctex.el" nil t t)
+  (load "preview-latex.el" nil t t)
+#+end_src
+
+To use AucTeX on Ubunut install the package ~auctex~.
+
 Default [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] setup, stolen from the [[http://www.emacswiki.org/emacs/AUCTeX][wiki]]:
 #+begin_src emacs-lisp
   (setq TeX-auto-save t)
