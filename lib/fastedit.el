@@ -20,14 +20,20 @@
 
 ;;; Commentary:
 
-;; Insert line before [Ctrl-Shift-Return]
-;; Join line [Strg-j]
-;; Join line bewow [Strg-Shift-j]
-;; Break line [Alt-j]
-;; Swap line down [Alt-Down]
-;; Swap line up [Alt-Up]
-;; Comment or uncomment region or line
-;; Kill "word" backwards (Python mode) [M-Delete]
+;; Requires:
+;;   thing-cmd.el (http://www.emacswiki.org/emacs/thing-cmds.el)
+;;   - hide-comnt.el (http://www.emacswiki.org/emacs/HideOrIgnoreComments)
+;;
+;; Functions:
+;;   Insert line before [Ctrl-Shift-Return]
+;;   Join line [Strg-j]
+;;   Join line bewow [Strg-Shift-j]
+;;   Break line [Alt-j]
+;;   Swap line down [Alt-Down]
+;;   Swap line up [Alt-Up]
+;;   Comment or uncomment region or line
+;;   Kill "word" backwards (Python mode) [M-Delete]
+;;   Mark thing at point (Ctrl-c f m)
 
 ;;
 
@@ -53,8 +59,8 @@
 (global-set-key (kbd "C-S-j") 'join-line-below)
 ;; this is py-newline-and-indent in python-mode
 (add-hook 'python-mode-hook '(lambda ()
-			       (define-key py-mode-map (kbd "C-j") 'join-line)
-			       (define-key py-mode-map (kbd "C-S-j") 'join-line-below)))
+             (define-key py-mode-map (kbd "C-j") 'join-line)
+             (define-key py-mode-map (kbd "C-S-j") 'join-line-below)))
 
 
 ;; move-line is taken from here:
@@ -105,8 +111,8 @@
                            (point))))
 
 (add-hook 'python-mode-hook '(lambda ()
-			       (define-key py-mode-map (kbd "M-<delete>")
-				 'aa/py-backward-kill-token)))
+             (define-key py-mode-map (kbd "M-<delete>")
+         'aa/py-backward-kill-token)))
 
 
 ;; Distraction free follows here
@@ -165,6 +171,27 @@
 
 (add-hook 'prog-mode-hook 'esk-add-watchwords)
 (add-hook 'python-mode-hook 'esk-add-watchwords)
+
+
+;; Mark thing at point
+;; The code is copied from here: http://emacswiki.org/emacs/MarkCommands
+(autoload 'mark-thing "thing-cmds")
+(defun mark-a-word-or-thing (arg)
+  "Select word on or before current point, and move point to beginning of word.
+
+   With a prefix ARG, first prompts for type of things and select ARG
+   things but you need to move the point to the beginnig of thing
+   first.
+
+   But if a thing has been selected, then extend the selection by one
+   thing on the other side of the point.  (So to select backwards,
+   select to the right first.)"
+  (interactive "P")
+  (if (or arg mark-active)
+      (call-interactively 'mark-thing)
+    (skip-syntax-backward "w_")
+    (mark-thing 'word)))
+(global-set-key (kbd "C-c f m") 'mark-a-word-or-thing)
 
 (provide 'fastedit)
 ;;; fastedit.el ends here
