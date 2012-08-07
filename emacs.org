@@ -573,9 +573,12 @@ Remember the Milk. The source is hosted on [[https://github.com/mbunkus/simple-r
 Window configuration related stuff is bound to ~F12~:
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "<f12>") 'persp-switch-quick)
-  (global-set-key (kbd "C-<f12>") 'persp-switch)
+  ;;(global-set-key (kbd "<f12>") 'persp-switch-quick)
+  ;;(global-set-key (kbd "C-<f12>") 'persp-switch)
+  (global-set-key (kbd "<f12>") 'wg-switch-to-workgroup)
+  (global-set-key (kbd "C-<f12>") 'wg-switch-right)
   (global-set-key (kbd "M-<f12>") 'aa/make80)
+  
 #+end_src
 
 Shortcuts for hacking on source code
