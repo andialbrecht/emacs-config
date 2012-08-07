@@ -166,11 +166,12 @@
 ;; Grabbed from Emacs Starter Kit https://github.com/dgutov/emacs-starter-kit/blob/0969080c73323bc0b872e385107d7337a845ab4d/starter-kit-defuns.el
 (defun esk-add-watchwords ()
   (font-lock-add-keywords
-   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+   nil '(("\\<\\(FIX\\(ME\\)?\\|TODO\\|HACK\\|REFACTOR\\|NOCOMMIT\\|XXX\\)"
           1 font-lock-warning-face t))))
 
 (add-hook 'prog-mode-hook 'esk-add-watchwords)
 (add-hook 'python-mode-hook 'esk-add-watchwords)
+(add-hook 'text-mode-hook 'esk-add-watchwords)
 
 
 ;; Mark thing at point
