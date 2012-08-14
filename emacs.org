@@ -523,6 +523,13 @@ Default [[http://www.emacswiki.org/emacs/AUCTeX][AucTeX]] setup, stolen from the
   (setq reftex-plug-into-AUCTeX t)
   
 #+end_src
+
+Custom key bindings:
+#+begin_src emacs-lisp
+  (eval-after-load 'latex
+    '(define-key LaTeX-mode-map (kbd "C-<return>") 'LaTeX-insert-item))
+#+end_src
+
 * Version Control
 ** Magit
 [[http://philjackson.github.com/magit/][Magit]] is available from MELPA, not much to do here.
