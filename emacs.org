@@ -278,6 +278,15 @@ setting disables that feature.
   (require 'tramp)
   (setq tramp-default-method "ssh")
 #+end_src
+** Recent files
+Recent files mode is part of GNU Emacs. Just activate it here and bind
+it to a simple keystroke since I use it almost each time I start Emacs
+to get back to the things I'm working on.
+#+begin_src emacs-lisp
+  (recentf-mode 1)
+  (global-set-key (kbd "C-x C-r") 'recentf-open-files)
+#+end_src
+
 ** ispell
 ispell's configuration is good as it is. Just change the default
 dictionary.
