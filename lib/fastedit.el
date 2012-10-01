@@ -236,5 +236,52 @@
 (global-set-key [M-down] 'move-text-down)
 
 
+;; see http://emacsrocks.com/e12.html
+(defun untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun cleanup-buffer-safe ()
+  "Perform a bunch of safe operations on the whitespace content of a buffer.
+Does not indent buffer, because it is used for a before-save-hook, and that
+might be bad."
+  (interactive)
+  (untabify-buffer)
+  (delete-trailing-whitespace)
+  (set-buffer-file-coding-system 'utf-8))
+
+(defun cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer.
+Including indent-buffer, which should not be called automatically on save."
+  (interactive)
+  (cleanup-buffer-safe)
+  (indent-buffer))
+;; ^^^
+
+
+;; see http://emacsrocks.com/e12.html
+;; requires mark-multi available from ELPA
+(require 'inline-string-rectangle)
+(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+
+(require 'mark-more-like-this)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
+(global-set-key (kbd "C-*") 'mark-all-like-this)
+
+(add-hook 'sgml-mode-hook
+          (lambda ()
+            (require 'rename-sgml-tag)
+            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
+;; ^^^
+
+
+
+
 (provide 'fastedit)
 ;;; fastedit.el ends here
