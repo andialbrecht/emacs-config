@@ -89,6 +89,12 @@
 ;;(require 'perspective)
 ;;(persp-mode)
 
+(require 'workgroups)
+(setq wg-prefix-key (kbd "C-c w"))
+(workgroups-mode 1)
+(wg-load "/home/andi/.workgroups")
+(setq wg-morph-on nil) ;; no morphing please
+
 (autoload 'ibuffer "ibuffer" "List buffers." t)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
@@ -153,20 +159,27 @@
 
 (yas/load-directory (expand-file-name "snippets" dotfiles-dir))
 
-(defun yas/org-very-safe-expand ()
-                 (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (make-variable-buffer-local 'yas/trigger-key)
-            (setq yas/trigger-key [tab])
-            (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
-            (define-key yas/keymap [tab] 'yas/next-field)))
+;; (defun yas/org-very-safe-expand ()
+;;                  (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (make-variable-buffer-local 'yas/trigger-key)
+;;             (setq yas/trigger-key [tab])
+;;             (add-to-list 'org-tab-first-hook 'yas/org-very-safe-expand)
+;;             (define-key yas/keymap [tab] 'yas/next-field)))
 
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+(setq ido-auto-merge-work-directories-length -1)
+
 (require 'tramp)
 (setq tramp-default-method "ssh")
+
+(recentf-mode 1)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+
+(setq ispell-dictionary "american")
 
 (require 'org)
 (require 'org-src)  ;; edit src inline
@@ -192,6 +205,7 @@
       '(js2-mode-hook
         js-mode-hook
         css-mode-hook
+        less-css-mode-hook
 ))
 
 (mapc (lambda (hook)
@@ -230,6 +244,9 @@
 (add-hook 'python-mode-hook
   (lambda ()
     (setq imenu-create-index-function 'python-imenu-create-index)))
+
+(require 'python-pylint)
+(require 'python-flake8)
 
 (require 'flymake)
 (setq flymake-no-changes-timeout 3)
@@ -277,6 +294,15 @@
 
 (require 'pony-mode)
 
+(defun pony-indent ()
+  "Indent current line as Jinja code"
+  (interactive)
+  (beginning-of-line)
+  (let ((indent (pony-calculate-indent)))
+    (if (< indent 0)
+        (setq indent 0))
+    (indent-line-to indent)))
+
 (require 'po-mode)
 (autoload 'po-mode "po-mode"
   "Major mode for translators to edit PO files" t)
@@ -285,6 +311,22 @@
 (autoload 'po-find-file-coding-system "po-compat")
 (modify-coding-system-alist 'file "\\.po\\'\\|\\.po\\."
                             'po-find-file-coding-system)
+
+(load "auctex.el" nil t t)
+(load "preview-latex.el" nil t t)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-PDF-mode t)
+(setq-default TeX-master nil)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+
+(eval-after-load 'latex
+  '(define-key LaTeX-mode-map (kbd "C-<return>") 'LaTeX-insert-item))
 
 (require 'magit)
 (require 'magit-svn)
@@ -311,8 +353,10 @@
 (setq twittering-timer-interval 300)
 (setq twittering-url-show-status nil)
 
-(global-set-key (kbd "<f12>") 'persp-switch-quick)
-(global-set-key (kbd "C-<f12>") 'persp-switch)
+;;(global-set-key (kbd "<f12>") 'persp-switch-quick)
+;;(global-set-key (kbd "C-<f12>") 'persp-switch)
+(global-set-key (kbd "<f12>") 'wg-switch-to-workgroup)
+(global-set-key (kbd "C-<f12>") 'wg-switch-right)
 (global-set-key (kbd "M-<f12>") 'aa/make80)
 
 (global-set-key (kbd "<f8> w") 'whitespace-mode)
