@@ -261,7 +261,7 @@
 		    (2 0 1)))
 		  "Saner defaults and goodies for Javascript [source: github]" single])
  (starter-kit-eshell .
-		     [(20120316 1542)
+		     [(20121001 1714)
 		      nil "Saner defaults and goodies: eshell tweaks [source: github]" single])
  (starter-kit-bindings .
 		       [(20120101 1955)
@@ -460,7 +460,7 @@
 		     [(20120428 45)
 		      nil "Highlight nested parens, brackets, braces a different color at each depth. [source: github]" single])
  (quickrun .
-	   [(20120904 2203)
+	   [(20121002 1410)
 	    nil "Run commands quickly [source: github]" single])
  (quick-buffer-switch .
 		      [(20120827 2008)
@@ -777,7 +777,7 @@
 		[(20110927 1253)
 		 nil "A major mode for editing Mustache files. [source: github]" single])
  (multiple-cursors .
-		   [(20120928 726)
+		   [(20121002 1219)
 		    nil "Multiple cursors for Emacs. [source: github]" tar])
  (multi-web-mode .
 		 [(20120925 942)
@@ -955,7 +955,7 @@
 	  (1 0)))
 	"build functions which contextually jump between files [source: github]" tar])
  (js3-mode .
-	   [(20120802 929)
+	   [(20120930 1058)
 	    nil "JavaScript scanner [source: github]" single])
  (js2-refactor .
 	       [(20120913 1258)
@@ -1044,7 +1044,7 @@
 		      [(20120920 1848)
 		       nil "highlight the word the point is on [source: github]" single])
  (icicles .
-	  [(20120928 2203)
+	  [(20121002 1)
 	   nil "Minibuffer input completion and cycling. [source: wiki]" tar])
  (ibuffer-vc .
 	     [(20120922 1120)
@@ -1085,6 +1085,9 @@
  (highlight-indentation .
 			[(20120129 357)
 			 nil "Minor modes for highlighting indentation [source: github]" single])
+ (hide-comnt .
+	     [(20120823 2038)
+	      nil "Hide/show comments in code. [source: wiki]" single])
  (helm-projectile .
 		  [(20120919 1416)
 		   ((helm
@@ -1129,7 +1132,7 @@
 	    (20120509)))
 	  "helm-sources and some utilities for GNU R. [source: github]" single])
  (helm .
-       [(20121001 714)
+       [(20121002 1013)
 	nil "Helm is an Emacs incremental and narrowing framework [source: github]" tar])
  (header2 .
 	  [(20120823 1956)
@@ -1153,7 +1156,7 @@
 	    [(20120916 1306)
 	     nil "Become an Emacs guru [source: github]" single])
  (groovy-mode .
-	      [(20120331 1031)
+	      [(20120510 1755)
 	       nil "Groovy mode derived mode [source: bzr]" single])
  (grin .
        [(20110806 1658)
@@ -1458,19 +1461,23 @@
 		[(20120921 1032)
 		 nil "Make file details hide-able in dired [source: wiki]" single])
  (dired+ .
-	 [(20120929 340)
+	 [(20121001 2353)
 	  nil "Extensions to Dired. [source: wiki]" single])
  (diminish .
 	   [(20091203 1912)
 	    nil "Diminished modes are minor modes with no modeline display [source: github]" single])
  (diff-hl .
-	  [(20120930 1929)
+	  [(20121002 805)
 	   ((smartrep
 	     (0 0 3)))
 	   "VC diff fringe highlighting [source: github]" single])
  (dic-lookup-w3m .
-		 [(20120930 136)
-		  nil "look up dictionaries on the Internet [source: svn]" tar])
+		 [(20121001 1338)
+		  ((w3m
+		    (20120723 324))
+		   (stem
+		    (20120826)))
+		  "look up dictionaries on the Internet [source: svn]" tar])
  (delim-kill .
 	     [(20100517 820)
 	      nil "Kill text between delimiters. [source: github]" single])
@@ -1493,7 +1500,7 @@
 	    [(20120823 1659)
 	     nil "Enhancements to `cus-edit.el'. [source: wiki]" single])
  (ctags-update .
-	       [(20120922 1220)
+	       [(20121001 1740)
 		nil "(auto) update TAGS in parent directory using exuberant-ctags [source: github]" single])
  (ctags .
 	[(20110911 1204)
@@ -1529,10 +1536,10 @@
 			   (6 5 5)))
 			 "Solarized themes for Emacs [source: github]" tar])
  (color-theme-sanityinc-tomorrow .
-				 [(20120927 1555)
+				 [(20121001 937)
 				  nil "A version of Chris Kempson's various Tomorrow themes [source: github]" tar])
  (color-theme-sanityinc-solarized .
-				  [(20120927 1556)
+				  [(20121001 936)
 				   nil "A version of Ethan Schoonover's Solarized themes [source: github]" tar])
  (color-theme-buffer-local .
 			   [(20120703 17)
@@ -1614,7 +1621,7 @@
 	   [(20081011 2126)
 	    nil "Quote text with a semi-box. [source: github]" single])
  (bookmark+ .
-	    [(20120930 8)
+	    [(20121002 414)
 	     nil "Bookmark+: extensions to standard library `bookmark.el'. [source: wiki]" tar])
  (bm .
      [(20120611 4)
