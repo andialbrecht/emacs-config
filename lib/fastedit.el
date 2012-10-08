@@ -281,6 +281,16 @@ Including indent-buffer, which should not be called automatically on save."
 ;; ^^^
 
 
+(defun dired-cleanupdir ()
+  "Clean up artifacts in current directory."
+  (interactive)
+  (shell-command "find . -name \"*.pyc\" -delete")
+  (shell-command "find . -name \"*~\" -delete")
+  (revert-buffer)
+)
+(define-key dired-mode-map (kbd "C-c C-c") 'dired-cleanupdir)
+
+
 
 
 (provide 'fastedit)
