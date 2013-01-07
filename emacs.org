@@ -302,7 +302,46 @@ Load orgmode.
   (require 'org)
   (require 'org-src)  ;; edit src inline
   (require 'htmlize)  ;; required for export
+  (setq org-agenda-files '("~/org/"))
+  (setq org-agenda-include-diary t)
+  (setq org-default-notes-file "~/org/gtd.org")
+  (setq org-hierarchical-checkbox-statistics nil)
   
+  ;; Remember
+  (setq remember-annotation-functions '(org-remember-annotation))
+  (setq remember-handler-functions '(org-remember-handler))
+  (add-hook 'remember-mode-hook 'org-remember-apply-template)
+  (setq org-remember-templates
+        '( ("Todo" ?t "* TODO %^{Brief Description} %^g\n  :PROPERTIES:\n    :Created: %U%?\n    :END:"
+            "~/org/gtd.org" "Tasks")
+           ("Journal" ?j "* %U %?\n\n %i\n %a" "~/org/journal.org")
+           ("Idea" ?i "* %^{Title}\n %i\n %a" "~/org/journal.org" "New Ideas")
+  ))
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb)
+  (global-set-key "\C-cr" 'org-remember)
+  
+  ;; My TODO sequence. Markers are
+  ;; - '!'  - record timestamp
+  ;; - '@'  - record a note
+  ;; - '/!' - record a timestamp when leaving the state (iff target state
+  ;;          doesn't alread logs a timestamp).
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "WAITING(w@/!)" "NEXT(n!)" "STARTED(s!)"
+                    "LATER(l@)"
+                    "|" "MAYBE(m!)" "DONE(d!)" "CANCELLED(c!)")))
+  
+  (setq org-todo-keyword-faces
+        (quote (("TODO"      :foreground "firebrick"    :weight bold)
+                ("STARTED"   :foreground "lightblue"    :weight bold)
+                ("DONE"      :foreground "dark green"   :weight bold)
+                ("WAITING"   :foreground "yellow"       :weight bold)
+                ("MAYBE"     :foreground "goldenrod"    :weight bold)
+                ("CANCELLED" :foreground "orangered"    :weight bold)
+                ("LATER"     :foreground "LightYellow4" :weight bold)
+                ("NEXT"      :foreground "gold"         :weight bold)
+                ("IDEA"      :foreground "#729fcf"      :weight bold))))
 #+end_src
 ** Editing
 By default is disabled.
@@ -476,7 +515,7 @@ somewhere.
 *** ipython
 Use [[http://ipython.scipy.org/dist/ipython.el][ipython.el]] as Python shell
 #+begin_src emacs-lisp
-  (require 'ipython)
+  ;;(require 'ipython)
 #+end_src
 ** Django
 For Django [[https://github.com/davidmiller/pony-mode][pony-mode]] does all the magic. ~pony-mode~ is available on
