@@ -22,7 +22,9 @@
 
 ;; Fonts and colors
 (set-frame-font "Monaco-18" nil t)
-(load-theme 'modus-vivendi)
+(if (>= emacs-major-version 28)
+  (load-theme 'modus-vivendi)
+  (load-theme 'tango-dark))
 
 ;; Highlight column 80
 (add-hook 'prog-mode-hook 'display-fill-column-indicator-mode)
@@ -42,6 +44,15 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
+
+; fetch the list of packages available 
+(unless package-archive-contents
+  (package-refresh-contents))
+
+; install the missing packages
+(dolist (package '(magit))
+  (unless (package-installed-p package)
+    (package-install package)))
 
 ;; MAC stuff
 (setq mac-option-modifier nil
