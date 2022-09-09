@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: David Miller <david@deadpansincerity.com>
-# group: django
-# name : {{ ... }}
-# key: var
-# --
-{{ ${1:item} }}

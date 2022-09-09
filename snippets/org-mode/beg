@@ -1,8 +1,0 @@
-# -*- coding: utf-8 -*-
-# name: beg
-# contributor: Andi Albrecht <albrecht.andi@gmail.com>
-# key: beg
-# --
-#+begin_src ${1:emacs-lisp}
-$0
-#+end_src
